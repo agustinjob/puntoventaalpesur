@@ -95,6 +95,37 @@ public class ProductoDAO {
 
         return listado;
     }
+    
+    public ArrayList<Producto> obtenerProductosBusquedaParametrizada() throws ClassNotFoundException, SQLException {
+
+        ArrayList<Producto> listado=null;
+        String sql="Select * from producto where eliminado = false order by descripcion";
+        
+            listado = new ArrayList<>();
+            Connection conn = SQL.conectarMySQL();
+            Statement s = conn.createStatement();
+            ResultSet res = s.executeQuery(sql);
+
+            while (res.next()) {
+
+                Producto pro = new Producto();
+                pro.setIdProducto(res.getInt(1));
+                pro.setCodigo(res.getString(2));
+                pro.setNombre(res.getString(3));
+                pro.setpCosto(res.getDouble(4));
+                pro.setpVenta(res.getDouble(5));
+                pro.setpMayoreo(res.getDouble(6));
+                pro.setInvMinimo(res.getInt(8));
+                pro.setCantidad(res.getDouble(7));
+            //    System.out.println("Codigo: " + pro.getCodigo() + " Nombre: " +pro.getNombre());
+
+                listado.add(pro);
+
+            }
+        
+
+        return listado;
+    }
 
     public String getProductoPorTipoPrecio(String nombre, ArrayList<Producto> lista, int tipo) {
 

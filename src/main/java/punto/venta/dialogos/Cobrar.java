@@ -25,15 +25,15 @@ import punto.venta.ventanas.VentasEstructura;
  */
 public class Cobrar extends javax.swing.JFrame {
 
-  DefaultTableModel md;
-  VentasDAO ventas = new VentasDAO();
-  VentasEstructura ven3;
-  Confirmacion confir;
-  ClienteDAO obj = new ClienteDAO();
-  ArrayList<Cliente> c;
-  Cliente cliente = new Cliente();
-  int tipoVenta = 1; // Efectivo
-  
+    DefaultTableModel md;
+    VentasDAO ventas = new VentasDAO();
+    VentasEstructura ven3;
+    Confirmacion confir;
+    ClienteDAO obj = new ClienteDAO();
+    ArrayList<Cliente> c;
+    Cliente cliente = new Cliente();
+    int tipoVenta = 1; // Efectivo
+
     public Cobrar(VentasEstructura ven3, DefaultTableModel md) {
         initComponents();
         setTitle("Cobro");
@@ -49,7 +49,7 @@ public class Cobrar extends javax.swing.JFrame {
         btnCredito.setIcon(cli);
         btn1.setIcon(d);
         btn2.setIcon(e);
-        btn3.setIcon(f);    
+        btn3.setIcon(f);
         this.ven3 = ven3;
         this.md = md;
         panelClientes.setVisible(false);
@@ -57,33 +57,33 @@ public class Cobrar extends javax.swing.JFrame {
         llenarCombo();
         AutoCompleteDecorator.decorate(comboClientes, ObjectToStringConverter.DEFAULT_IMPLEMENTATION);
     }
-  
+
     public void llenarCombo() {
-          
+
         try {
             c = new ArrayList<Cliente>();
             c = obj.getClientes();
-                comboClientes.removeAllItems();
-                comboClientes.addItem("");
+            comboClientes.removeAllItems();
+            comboClientes.addItem("");
             int i = 0;
             while (i < c.size()) {
                 comboClientes.addItem(c.get(i).getNombres());
                 i++;
             }
         } catch (ClassNotFoundException ex) {
-           Utilidades.confirma(confir, "Hubo un error en el sistema");
+            Utilidades.confirma(confir, "Hubo un error en el sistema");
         } catch (SQLException ex) {
             Utilidades.confirma(confir, "Hubo un error con la conexion a la base de datos");
         }
 
     }
-    
-    public boolean buscarCliente(){
-       String nombre =(String)comboClientes.getSelectedItem();
+
+    public boolean buscarCliente() {
+        String nombre = (String) comboClientes.getSelectedItem();
         int i = 0;
         Cliente cli = new Cliente();
-                while(i<c.size()){
-            if(c.get(i).getNombres().equalsIgnoreCase(nombre)){
+        while (i < c.size()) {
+            if (c.get(i).getNombres().equalsIgnoreCase(nombre)) {
                 cli = c.get(i);
                 cliente = cli;
                 break;
@@ -91,16 +91,17 @@ public class Cobrar extends javax.swing.JFrame {
             i++;
         }
 
-        if(cli.getNombres() == null){
-           System.out.println("No lo Encontro al cliente");
-            Utilidades.confirma(confir,"Datos del cliente no encontrados");
+        if (cli.getNombres() == null) {
+            System.out.println("No lo Encontro al cliente");
+            Utilidades.confirma(confir, "Datos del cliente no encontrados");
             return false;
-        }else{
-           System.out.println("Si lo Encontro al cliente"); 
-           return true;
+        } else {
+            System.out.println("Si lo Encontro al cliente");
+            return true;
         }
-         
+
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -130,6 +131,11 @@ public class Cobrar extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel1MouseClicked(evt);
+            }
+        });
 
         jPanel10.setBackground(new java.awt.Color(255, 255, 255));
         jPanel10.setPreferredSize(new java.awt.Dimension(420, 470));
@@ -161,6 +167,11 @@ public class Cobrar extends javax.swing.JFrame {
                 btnCreditoActionPerformed(evt);
             }
         });
+        btnCredito.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnCreditoKeyPressed(evt);
+            }
+        });
 
         btnefectivo.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
         btnefectivo.setBorderPainted(false);
@@ -175,6 +186,11 @@ public class Cobrar extends javax.swing.JFrame {
         btnefectivo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnefectivoActionPerformed(evt);
+            }
+        });
+        btnefectivo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnefectivoKeyPressed(evt);
             }
         });
 
@@ -193,9 +209,17 @@ public class Cobrar extends javax.swing.JFrame {
                 txtresultadoActionPerformed(evt);
             }
         });
+        txtresultado.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtresultadoKeyPressed(evt);
+            }
+        });
 
         txtn1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtn1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtn1KeyPressed(evt);
+            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtn1KeyReleased(evt);
             }
@@ -260,6 +284,11 @@ public class Cobrar extends javax.swing.JFrame {
 
         comboClientes.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         comboClientes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboClientesActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelClientesLayout = new javax.swing.GroupLayout(panelClientes);
         panelClientes.setLayout(panelClientesLayout);
@@ -452,75 +481,81 @@ public class Cobrar extends javax.swing.JFrame {
     }//GEN-LAST:event_txtn2ActionPerformed
 
     private void btnCreditoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreditoActionPerformed
-         tipoVenta = 2; // Credito
+        tipoVenta = 2; // Credito
         panelClientes.setVisible(true);
-        panelEfectivo.setVisible(false);      
+        panelEfectivo.setVisible(false);
 
     }//GEN-LAST:event_btnCreditoActionPerformed
 
     private void btn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn1ActionPerformed
+       imprimeTicket();
+
+    }//GEN-LAST:event_btn1ActionPerformed
+public void imprimeTicket(){
         ImprimirTicket obj = new ImprimirTicket();
         try {
             System.out.println("TIPO VENTA = " + tipoVenta);
-            boolean ban=true;
-            String idCliente=cliente.getId();
-            if(tipoVenta == 2){
-            ban = buscarCliente();
-            idCliente=cliente.getId();
+            boolean ban = true;
+            String idCliente = cliente.getId();
+            if (tipoVenta == 2) {
+                ban = buscarCliente();
+                idCliente = cliente.getId();
             }
-            if(ban==true){
-            ventas.registrarVenta(md,tipoVenta,idCliente);
-            String res= obj.convertirModeloAString(md, txtn2.getText());
-            obj.imprimirTicket(res);
-            ven3.eliminaCelda(2);
-            ven3.numeroArticulos = 0;
-            ven3.total = 0;
+            if (ban == true) {
+                ventas.registrarVenta(md, tipoVenta, idCliente);
+                String res = obj.convertirModeloAString(md, txtn2.getText());
+                obj.imprimirTicket(res);
+                ven3.eliminaCelda(2);
+                ven3.numeroArticulos = 0;
+                ven3.total = 0;
 
-            TicketDAO tick = new TicketDAO();
-            ven3.llenarCombo();
-            ven3.actualizaTicket(tick.getNumero()+"");
-            this.dispose();
-     }
+                TicketDAO tick = new TicketDAO();
+                ven3.llenarCombo();
+                ven3.actualizaTicket(tick.getNumero() + "");
+                this.dispose();
+            }
 
         } catch (ClassNotFoundException ex) {
             Utilidades.confirma(confir, "Ocurrio un error con el sistema");
         }
-
-    }//GEN-LAST:event_btn1ActionPerformed
-
+}
     private void btn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn2ActionPerformed
-        try {
+     soloRegistraVenta();
+    }//GEN-LAST:event_btn2ActionPerformed
+public void soloRegistraVenta(){
+   try {
             System.out.println("TIPO VENTA = " + tipoVenta);
-            boolean ban=true;
-            String idCliente=cliente.getId();
-            if(tipoVenta == 2){
-            ban = buscarCliente();
-            idCliente=cliente.getId();
-            double totalPro= Double.parseDouble(txtn2.getText());
-            double saldo=obj.getSaldoCliente(idCliente);
-            double totalTotal = totalPro + saldo;
-            if(totalTotal>Double.parseDouble(cliente.getLimiteCredito())){
-            ban=false;
-            Utilidades.confirma(confir, "Esta compra sobre pasa el limite de credito asignado al cliente");
+            boolean ban = true;
+            String idCliente = cliente.getId();
+            if (tipoVenta == 2) {
+                ban = buscarCliente();
+                if(ban==true){
+                idCliente = cliente.getId();
+                double totalPro = Double.parseDouble(txtn2.getText());
+                double saldo = obj.getSaldoCliente(idCliente);
+                double totalTotal = totalPro + saldo;
+                if (totalTotal > Double.parseDouble(cliente.getLimiteCredito())) {
+                    ban = false;
+                    Utilidades.confirma(confir, "Esta compra sobre pasa el limite de credito asignado al cliente");
+                }
+                }
             }
-            }
-            if(ban==true){
-            ventas.registrarVenta(md,tipoVenta,idCliente);
-            ven3.eliminaCelda(2);
-            ven3.numeroArticulos = 0;
-            ven3.total = 0;
+            if (ban == true) {
+                ventas.registrarVenta(md, tipoVenta, idCliente);
+                ven3.eliminaCelda(2);
+                ven3.numeroArticulos = 0;
+                ven3.total = 0;
 
-            TicketDAO tick = new TicketDAO();
-            ven3.llenarCombo();
-            ven3.actualizaTicket(tick.getNumero()+"");
-            this.dispose();
+                TicketDAO tick = new TicketDAO();
+                ven3.llenarCombo();
+                ven3.actualizaTicket(tick.getNumero() + "");
+                this.dispose();
             }
 
         } catch (ClassNotFoundException ex) {
             System.out.println(ex.getLocalizedMessage());
         }
-    }//GEN-LAST:event_btn2ActionPerformed
-
+}
     private void btn3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn3ActionPerformed
         this.dispose();
 
@@ -533,14 +568,19 @@ public class Cobrar extends javax.swing.JFrame {
     }//GEN-LAST:event_btnefectivoActionPerformed
 
     private void txtn1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtn1KeyReleased
-        double n1, n2, result = 0;
+        int nu = evt.getKeyCode();
+        if (nu == 96 || nu == 97 || nu == 98 || nu == 99 || nu == 100 || nu == 101 || nu == 102 || nu == 103 || nu == 104 || nu == 105  || nu == 48 || nu == 49 || nu == 50 || nu == 51 || nu == 52
+                 || nu == 53 || nu == 54 || nu == 55 || nu == 56 || nu == 57) {
+            double n1, n2, result = 0;
+            n1 = Double.parseDouble(txtn1.getText());
+            n2 = Double.parseDouble(txtn2.getText());
+            System.out.println("N1 = " + n1);
+            if (n2 <= n1) {
+                result = n1 - n2;
+                txtresultado.setText("" + result);
+            }
+        } else {
 
-        n1 = Double.parseDouble(txtn1.getText());
-        n2 = Double.parseDouble(txtn2.getText());
-        System.out.println("N1 = " + n1);
-        if(n2<=n1){
-            result = n1 - n2;
-            txtresultado.setText("" + result);
         }
     }//GEN-LAST:event_txtn1KeyReleased
 
@@ -548,6 +588,44 @@ public class Cobrar extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtresultadoActionPerformed
 
+    private void txtn1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtn1KeyPressed
+        teclaPresionada(evt.getKeyCode());
+    }//GEN-LAST:event_txtn1KeyPressed
+
+    private void btnefectivoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnefectivoKeyPressed
+       teclaPresionada(evt.getKeyCode());
+    }//GEN-LAST:event_btnefectivoKeyPressed
+
+    private void btnCreditoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnCreditoKeyPressed
+         teclaPresionada(evt.getKeyCode());
+    }//GEN-LAST:event_btnCreditoKeyPressed
+
+    private void txtresultadoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtresultadoKeyPressed
+        teclaPresionada(evt.getKeyCode());
+    }//GEN-LAST:event_txtresultadoKeyPressed
+
+    private void comboClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboClientesActionPerformed
+       btnCredito.requestFocus();
+    }//GEN-LAST:event_comboClientesActionPerformed
+
+    private void jPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseClicked
+       btnCredito.requestFocus();
+    }//GEN-LAST:event_jPanel1MouseClicked
+   
+    public void teclaPresionada(int num){
+  Utilidades.im("Entro al metodo");
+    if(num==112){
+    imprimeTicket();
+    }
+    
+    if(num==113){
+    soloRegistraVenta();
+    }
+    
+    if(num==27){
+     this.dispose();
+    }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn1;
     private javax.swing.JButton btn2;
@@ -567,7 +645,7 @@ public class Cobrar extends javax.swing.JFrame {
     public javax.swing.JLabel numArticulos;
     private javax.swing.JPanel panelClientes;
     private javax.swing.JPanel panelEfectivo;
-    private javax.swing.JTextField txtn1;
+    public static javax.swing.JTextField txtn1;
     public static javax.swing.JTextField txtn2;
     private javax.swing.JTextField txtresultado;
     // End of variables declaration//GEN-END:variables

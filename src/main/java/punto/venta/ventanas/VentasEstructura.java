@@ -6,7 +6,10 @@
 package punto.venta.ventanas;
 
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -35,7 +38,7 @@ import punto.venta.utilidades.Utilidades;
  *
  * @author job
  */
-public class VentasEstructura extends javax.swing.JPanel {
+public class VentasEstructura extends javax.swing.JPanel implements ActionListener,KeyListener {
 
     DefaultTableModel md;
     String data[][] = {};
@@ -44,13 +47,14 @@ public class VentasEstructura extends javax.swing.JPanel {
     ProductoDAO obj = new ProductoDAO();
     ArrayList<Producto> p = new ArrayList();
     DefaultTableCellRenderer dt = new DefaultTableCellRenderer();
-    int tipoPrecio;
+    static int tipoPrecio;
     private Usuario usu;
     public double total = 0.0d;
     public int numeroArticulos = 0;
     TicketDAO tick = new TicketDAO();
     Confirmacion confir;
     private Dimension dim;
+    Estructura e;
 
     public VentasEstructura() {
         initComponents();
@@ -63,15 +67,25 @@ public class VentasEstructura extends javax.swing.JPanel {
         md = new DefaultTableModel(data, cabeza) {
             @Override
             public boolean isCellEditable(int row, int column) {
-                return column == 3 || column == 4 ? true : false;
+                return column == 3 || column == 4 || column == 2 ? true : false;
             }
         };
         inicializarIconos();
         txtTicket.setText("Folio del ticket: " + tick.getNumero());
         centrarValoresTabla();
+      //  this.setFocusTraversalKeysEnabled(true);
+     //   this.setFocusable(true);
+      //  this.requestFocus();
+        addKeyListener(this);
+        Utilidades.im("Entro a ventas");
+        Utilidades.im(""+this.hasFocus());
+        
         
     }
-
+    
+public void setEstructura(Estructura e){
+this.e=e;
+}
     public void actualizaTicket(String tik) {
         txtTicket.setText("Folio del ticket: " + tik);
         txtTotal.setText("");
@@ -158,6 +172,7 @@ public class VentasEstructura extends javax.swing.JPanel {
                 }
             } else {
                 Utilidades.confirma(confir, "No haz seleccionado ninguna fila");
+                
             }
 
         } else {
@@ -202,9 +217,11 @@ public class VentasEstructura extends javax.swing.JPanel {
         while (i < model.getRowCount()) {
             String cantidad = (String) model.getValueAt(i, 3);
             String inventario = (String) model.getValueAt(i, 5);
+            String pVenta = (String) model.getValueAt(i, 2);
             System.out.println("Cantidad " + cantidad + " Inventario " + inventario);
             double can = Double.parseDouble(cantidad);
             double inv = Double.parseDouble(inventario);
+            Double.parseDouble(pVenta);
             if (can > inv) {
                 JOptionPane.showMessageDialog(null, "Revisa los datos, ingresaste más cantidad de un producto de lo que tienes en inventario");
                 return true;
@@ -247,8 +264,18 @@ public class VentasEstructura extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                formMouseClicked(evt);
+            }
+        });
 
         panelTicket.setBackground(new java.awt.Color(102, 0, 102));
+        panelTicket.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                panelTicketFocusGained(evt);
+            }
+        });
 
         jLabel1.setBackground(new java.awt.Color(204, 204, 0));
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
@@ -351,11 +378,6 @@ public class VentasEstructura extends javax.swing.JPanel {
         txtTabla.setGridColor(new java.awt.Color(255, 255, 255));
         txtTabla.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         txtTabla.setShowHorizontalLines(false);
-        txtTabla.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtTablaFocusLost(evt);
-            }
-        });
         txtTabla.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtTablaKeyPressed(evt);
@@ -585,9 +607,7 @@ public class VentasEstructura extends javax.swing.JPanel {
                     double can = Double.parseDouble(info[5]);
                     if (can > 0) {
                         md.addRow(info);
-
                         total = total + (Double.parseDouble(info[2]) * Double.parseDouble(info[3]));
-
                         txtTotal.setText(total + "");
                         numeroArticulos = numeroArticulos + 1;
                     } else {
@@ -597,8 +617,8 @@ public class VentasEstructura extends javax.swing.JPanel {
                 }
             }
             comboProductos.setSelectedIndex(0);
-
         }
+        e.requestFocus();
 
     }//GEN-LAST:event_txtagregarActionPerformed
 
@@ -649,6 +669,7 @@ public class VentasEstructura extends javax.swing.JPanel {
             Utilidades.confirma(confir, "Se ha desactivado el precio de mayoreo");
             tipoPrecio = 1;
         }
+      
     }//GEN-LAST:event_btn3ActionPerformed
 
     private void btn4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn4ActionPerformed
@@ -666,15 +687,13 @@ public class VentasEstructura extends javax.swing.JPanel {
 
         if (numeroArticulos > 0)
             numeroArticulos = numeroArticulos - 1;
+        
+        e.requestFocus();
     }//GEN-LAST:event_btn6ActionPerformed
-
-    private void txtTablaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTablaFocusLost
-
-    }//GEN-LAST:event_txtTablaFocusLost
 
     private void txtTablaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTablaKeyPressed
        
-      
+try{      
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             int row = txtTabla.getSelectedRow();
             int column = txtTabla.getSelectedColumn();
@@ -704,7 +723,17 @@ public class VentasEstructura extends javax.swing.JPanel {
         if (evt.getKeyCode() == 109) {
            restarDeUno();
         }
-       
+        if(evt.getKeyCode() == 127){
+          eliminaCelda(1);
+        }
+}catch(NumberFormatException exc){
+  Utilidades.confirma(confir, "Haz ingresado una letra u otro caracter en lugar de un número. Por favor revisa los datos ingresados");
+}
+
+if (txtTabla.getSelectedRow() >= 0) {
+}else{
+e.requestFocus();
+}
 
     }//GEN-LAST:event_txtTablaKeyPressed
 
@@ -747,11 +776,18 @@ public class VentasEstructura extends javax.swing.JPanel {
     }//GEN-LAST:event_btn7ActionPerformed
 
     private void btn8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn8ActionPerformed
-        DefaultTableModel tm = (DefaultTableModel) txtTabla.getModel();
+       realizaCobro();
+       e.requestFocus();
+    }//GEN-LAST:event_btn8ActionPerformed
+
+    
+    public void realizaCobro(){
+            DefaultTableModel tm = (DefaultTableModel) txtTabla.getModel();
 
         if (tm.getRowCount() <= 0) {
             Utilidades.confirma(confir, "Por favor ingresa productos para realizar el cobro");
         } else {
+            try{
             if (!masCantidadQueInventario()) {
                 Cobrar obj = new Cobrar(this,md);
                 obj.setVisible(true);
@@ -759,12 +795,25 @@ public class VentasEstructura extends javax.swing.JPanel {
                 Cobrar.txtn2.setText(info);
                 obj.numArticulos.setText(numeroArticulos + "");
             }
+            }catch(NumberFormatException e){
+                Utilidades.confirma(confir, "Ingresaste una letra u otro caracter en lugar de un número. Por favor revisa la información ingresada");
+            }
         }
-    }//GEN-LAST:event_btn8ActionPerformed
-
+    }
     private void txtTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTotalActionPerformed
+
+    private void panelTicketFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_panelTicketFocusGained
+        System.out.println("Quien lo gano " + evt.getComponent().getName());
+        System.out.println("Quien lo perde " + evt.getOppositeComponent().getName());
+    }//GEN-LAST:event_panelTicketFocusGained
+
+    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+        System.out.println("Dio Click");
+        txtTabla.clearSelection();
+        e.requestFocus();
+    }//GEN-LAST:event_formMouseClicked
     public void inicializarIconos() {
         System.out.println("Si entro aca");
 
@@ -825,4 +874,24 @@ public class VentasEstructura extends javax.swing.JPanel {
     public static javax.swing.JTextField txtTotal;
     private javax.swing.JButton txtagregar;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+       Utilidades.im("1");
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+         Utilidades.im("2");
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+       Utilidades.im("Tecla presionada " + e.getKeyCode());
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+      Utilidades.im("1");
+    }
 }

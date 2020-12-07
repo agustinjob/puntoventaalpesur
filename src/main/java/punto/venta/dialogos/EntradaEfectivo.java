@@ -22,6 +22,7 @@ public class EntradaEfectivo extends javax.swing.JFrame {
      Confirmacion confir;
      int ocultar = 0;
      
+     
     public EntradaEfectivo() {
         initComponents();
         setTitle("Registro de Entradas de Efectivo");

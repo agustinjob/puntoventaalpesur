@@ -95,7 +95,7 @@ public class TicketDAO {
         try {
             Connection conn = SQL.conectarMySQL();
             Statement s = conn.createStatement();
-            datos = s.executeQuery("SELECT idTicket,fecha,hora FROM `Ventas` where fecha = '" + formatoFecha.format(fecha) + "' and devolucion = false  and devocompleta=false GROUP by idTicket");
+            datos = s.executeQuery("SELECT idTicket,fecha,hora FROM `Ventas` where fecha = '" + formatoFecha.format(fecha) + "' and devolucion = false  and devocompleta=false GROUP by fecha,hora");
 
             return datos;
         } catch (SQLException ex) {

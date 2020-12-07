@@ -8,11 +8,14 @@ package punto.venta.producto;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import punto.venta.dao.VentasDAO;
 import punto.venta.dialogos.Confirmacion;
+import punto.venta.misclases.CrearExcel;
 import punto.venta.utilidades.Utilidades;
 
 /**
@@ -27,6 +30,8 @@ public class ProductoVentas extends javax.swing.JPanel {
     public ProductoVentas() {
         initComponents();
         ImageIcon lupa = new ImageIcon("src/main/java/iconos/lupa.png");
+        ImageIcon excel = new ImageIcon("src/main/java/iconos/excel.png");
+        btnGenerarExcel.setIcon(excel);
         btnBuscar.setIcon(lupa);
         btnBuscarLapso.setIcon(lupa);
     }
@@ -107,6 +112,7 @@ public void llenaTabla() throws SQLException {
         jLabel9 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla_ventas = new javax.swing.JTable();
+        btnGenerarExcel = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -159,6 +165,14 @@ public void llenaTabla() throws SQLException {
         ));
         jScrollPane1.setViewportView(tabla_ventas);
 
+        btnGenerarExcel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnGenerarExcel.setText("Genera Excel");
+        btnGenerarExcel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGenerarExcelActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -185,7 +199,9 @@ public void llenaTabla() throws SQLException {
                         .addGap(60, 60, 60)
                         .addComponent(fechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(52, 52, 52)
-                        .addComponent(btnBuscarLapso))
+                        .addComponent(btnBuscarLapso)
+                        .addGap(55, 55, 55)
+                        .addComponent(btnGenerarExcel, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1291, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -209,6 +225,7 @@ public void llenaTabla() throws SQLException {
                     .addComponent(jLabel9))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnGenerarExcel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
@@ -314,10 +331,36 @@ public void llenaTabla() throws SQLException {
         
     }//GEN-LAST:event_btnBuscarLapsoActionPerformed
 
+    private void btnGenerarExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarExcelActionPerformed
+        Date inicio = fechaInicio.getDate();
+            Date fin = fechaFin.getDate();
+            System.out.println("Esto tiene inicio" + inicio);
+           if(inicio == null || fin == null){
+               Utilidades.confirma(confir, "Por favor ingresa la fecha de inicio y la fecha final");
+           }else{
+                ResultSet res = objVen.consultarVentasPorFechaPorLapsosDeTiempo(inicio, fin);
+                CrearExcel objE = new CrearExcel();
+            try {
+                 res.last();
+            if (res.getRow() == 0) {
+                Utilidades.confirma(confir, "No hay datos de ventas en esa fecha especifica");
+            }else{
+                 res.beforeFirst();
+                objE.writeExcelVentas(res, inicio,  fin);
+            }
+            } catch (Exception ex) {
+                Utilidades.confirma(confir, "Ocurrio un error en el sistema");
+                Utilidades.im(ex.getLocalizedMessage());
+            }
+                 
+           }
+    }//GEN-LAST:event_btnGenerarExcelActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnBuscarLapso;
+    private javax.swing.JButton btnGenerarExcel;
     private javax.swing.JComboBox<String> combo;
     private com.toedter.calendar.JDateChooser fechaFin;
     private com.toedter.calendar.JDateChooser fechaInicio;

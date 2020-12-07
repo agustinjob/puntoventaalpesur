@@ -11,15 +11,21 @@ import punto.venta.usuario.UsuarioEstructura;
 import punto.venta.cliente.ClienteEstructura;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import javax.swing.ImageIcon;
 import punto.venta.dao.UsuarioDAO;
+import punto.venta.dialogos.Confirmacion;
+import punto.venta.dialogos.EntradaEfectivo;
+import punto.venta.dialogos.SalidaEfectivo;
 import punto.venta.utilidades.Utilidades;
+import static punto.venta.ventanas.VentasEstructura.tipoPrecio;
 
 /**
  *
  * @author agus_
  */
-public class Estructura extends javax.swing.JFrame implements ActionListener {
+public class Estructura extends javax.swing.JFrame implements ActionListener, KeyListener {
 
     VentasEstructura objVentas = new VentasEstructura();
     InventarioEstructura inventarios = new InventarioEstructura();
@@ -29,6 +35,7 @@ public class Estructura extends javax.swing.JFrame implements ActionListener {
     TransferirEstructura transferir = new TransferirEstructura();
     CorteEstructura corte = new CorteEstructura();
     NubeEstructura nube = new NubeEstructura();
+    Confirmacion confir;
 
     public Estructura() {
         initComponents();
@@ -42,7 +49,12 @@ public class Estructura extends javax.swing.JFrame implements ActionListener {
         btnTransferir.addActionListener(this);
         btnCorte.addActionListener(this);
         btnNube.addActionListener(this);
+        btnConfiguracion.addActionListener(this);
+        addKeyListener(this);
+        setFocusable(true);
+        setFocusTraversalKeysEnabled(false);
         contenedor.add(objVentas);
+        objVentas.setEstructura(this);
         inicializarIconos();
 
     }
@@ -64,6 +76,7 @@ public class Estructura extends javax.swing.JFrame implements ActionListener {
         btnUsuario = new javax.swing.JButton();
         btnCorte = new javax.swing.JButton();
         btnNube = new javax.swing.JButton();
+        btnConfiguracion = new javax.swing.JButton();
         nombreUsuario = new javax.swing.JLabel();
         contenedor = new javax.swing.JPanel();
 
@@ -147,6 +160,14 @@ public class Estructura extends javax.swing.JFrame implements ActionListener {
         btnNube.setPreferredSize(new java.awt.Dimension(135, 35));
         jPanel2.add(btnNube);
 
+        btnConfiguracion.setBackground(new java.awt.Color(0, 51, 102));
+        btnConfiguracion.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        btnConfiguracion.setForeground(new java.awt.Color(255, 255, 255));
+        btnConfiguracion.setText("Configuración");
+        btnConfiguracion.setBorder(null);
+        btnConfiguracion.setPreferredSize(new java.awt.Dimension(135, 35));
+        jPanel2.add(btnConfiguracion);
+
         nombreUsuario.setFont(new java.awt.Font("Cambria", 1, 24)); // NOI18N
         nombreUsuario.setForeground(new java.awt.Color(255, 255, 255));
         nombreUsuario.setText("jLabel1");
@@ -178,7 +199,6 @@ public class Estructura extends javax.swing.JFrame implements ActionListener {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addComponent(nombreUsuario)
                         .addGap(16, 16, 16)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -220,7 +240,7 @@ public class Estructura extends javax.swing.JFrame implements ActionListener {
         Object evt = e.getSource();
 
         if (evt.equals(btnVentas)) {
-                
+
             inventarios.setVisible(false);
             objVentas.setVisible(true);
             objVentas.llenarCombo();
@@ -238,7 +258,7 @@ public class Estructura extends javax.swing.JFrame implements ActionListener {
         } else if (evt.equals(btnInventario)) {
 
             objVentas.setVisible(false);
-             nube.setVisible(false);
+            nube.setVisible(false);
             inventarios.setVisible(true);
             clientes.setVisible(false);
             usuarios.setVisible(false);
@@ -252,7 +272,7 @@ public class Estructura extends javax.swing.JFrame implements ActionListener {
         } else if (evt.equals(btnCliente)) {
 
             objVentas.setVisible(false);
-             nube.setVisible(false);
+            nube.setVisible(false);
             inventarios.setVisible(false);
             clientes.setVisible(true);
             usuarios.setVisible(false);
@@ -265,7 +285,7 @@ public class Estructura extends javax.swing.JFrame implements ActionListener {
 
         } else if (evt.equals(btnUsuario)) {
             objVentas.setVisible(false);
-             nube.setVisible(false);
+            nube.setVisible(false);
             inventarios.setVisible(false);
             clientes.setVisible(false);
             usuarios.setVisible(true);
@@ -277,7 +297,7 @@ public class Estructura extends javax.swing.JFrame implements ActionListener {
 
         } else if (evt.equals(btnProductos)) {
             objVentas.setVisible(false);
-             nube.setVisible(false);
+            nube.setVisible(false);
             inventarios.setVisible(false);
             clientes.setVisible(false);
             usuarios.setVisible(false);
@@ -289,7 +309,7 @@ public class Estructura extends javax.swing.JFrame implements ActionListener {
 
         } else if (evt.equals(btnTransferir)) {
             objVentas.setVisible(false);
-             nube.setVisible(false);
+            nube.setVisible(false);
             inventarios.setVisible(false);
             clientes.setVisible(false);
             usuarios.setVisible(false);
@@ -313,8 +333,8 @@ public class Estructura extends javax.swing.JFrame implements ActionListener {
             contenedor.add(corte);
             contenedor.validate();
 
-        }else if(evt.equals(btnNube)){
-         objVentas.setVisible(false);
+        } else if (evt.equals(btnNube)) {
+            objVentas.setVisible(false);
             nube.setVisible(true);
             inventarios.setVisible(false);
             clientes.setVisible(false);
@@ -342,6 +362,7 @@ public class Estructura extends javax.swing.JFrame implements ActionListener {
         ImageIcon f = new ImageIcon("src/main/java/iconos/usuario.png");
         ImageIcon e = new ImageIcon("src/main/java/iconos/ticket.png");
         ImageIcon nubeIcon = new ImageIcon("src/main/java/iconos/servidorChico.png");
+        ImageIcon configuracion = new ImageIcon("src/main/java/iconos/engranajes.png");
 
         btnVentas.setIcon(gg);
         btnCliente.setIcon(b);
@@ -350,6 +371,7 @@ public class Estructura extends javax.swing.JFrame implements ActionListener {
         btnNube.setIcon(nubeIcon);
         btnUsuario.setIcon(f);
         btnCorte.setIcon(h);
+        btnConfiguracion.setIcon(configuracion);
 
         btnTransferir.setIcon(j);
         caja.setIcon(registradora);
@@ -361,7 +383,7 @@ public class Estructura extends javax.swing.JFrame implements ActionListener {
             btnProductos.setEnabled(false);
             btnTransferir.setEnabled(false);
             btnUsuario.setEnabled(false);
-            
+
             btnCliente.setVisible(false);
             btnProductos.setVisible(false);
             btnTransferir.setVisible(false);
@@ -412,6 +434,7 @@ public class Estructura extends javax.swing.JFrame implements ActionListener {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCliente;
+    private javax.swing.JButton btnConfiguracion;
     private javax.swing.JButton btnCorte;
     private javax.swing.JButton btnInventario;
     private javax.swing.JButton btnNube;
@@ -427,5 +450,42 @@ public class Estructura extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JLabel nombreUsuario;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+        System.out.println("Key typed"); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        System.out.println("Key pressed " + e.getKeyCode());
+        if (e.getKeyCode() == 122) {
+
+            if (VentasEstructura.tipoPrecio == 1) {
+                Utilidades.confirma(confir, "Se ha activado el precio de mayoreo");
+                VentasEstructura.tipoPrecio = 2;
+            } else {
+                Utilidades.confirma(confir, "Se ha desactivado el precio de mayoreo");
+                VentasEstructura.tipoPrecio = 1;
+            }
+        }
+
+        if (e.getKeyCode() == 118) {
+            EntradaEfectivo objeto = new EntradaEfectivo();
+            objeto.setVisible(true);
+        }
+        if (e.getKeyCode() == 119) {
+            SalidaEfectivo objeto = new SalidaEfectivo();
+            objeto.setVisible(true);
+        }
+        if (e.getKeyCode() == 123) {
+            objVentas.realizaCobro();
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        System.out.println("Key resleased");
+    }
 
 }
