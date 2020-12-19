@@ -19,8 +19,9 @@ public class Tabbed extends javax.swing.JFrame {
      */
       PanelTabla obj[]= new PanelTabla[4];
       JPanel obj1 = new JPanel();   
-   JPanel obj2 = new JPanel();
-    public Tabbed() {
+      JPanel obj2 = new JPanel();
+    
+      public Tabbed() {
         initComponents();
     }
 
