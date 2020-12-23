@@ -7,6 +7,8 @@ package bd;
 
 import javax.swing.JPanel;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import punto.venta.tabla.TablaVentas;
 
 /**
  *
@@ -17,7 +19,7 @@ public class Tabbed extends javax.swing.JFrame {
     /**
      * Creates new form Tabbed
      */
-      PanelTabla obj[]= new PanelTabla[4];
+      TablaVentas obj[]= new TablaVentas[4];
       JPanel obj1 = new JPanel();   
       JPanel obj2 = new JPanel();
     
@@ -151,16 +153,20 @@ public class Tabbed extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
  
-   obj[0]=new PanelTabla();
-   obj[1]=new PanelTabla();
+   obj[0]=new TablaVentas();
+   obj[1]=new TablaVentas();
      pestanas.addTab("Ticket", obj[0]);
      pestanas.addTab("Ticket 2", obj[1]);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
        JTable a=obj[0].getTabla();
-       a.setValueAt("Hola", 0, 0);
-       System.out.println(pestanas.indexOfComponent(obj[0]));
+      DefaultTableModel modelo=(DefaultTableModel) a.getModel();
+      String x[]={"1","2","3"};
+      modelo.addRow(x);
+       
+      System.out.println(pestanas.indexOfComponent(obj[1]));
+      System.out.println("Este es el Index " + pestanas.getSelectedIndex());
       System.out.println("Nombre del componente " + pestanas.getComponent(pestanas.getSelectedIndex()).getName());
        
     }//GEN-LAST:event_jButton3ActionPerformed
