@@ -5,6 +5,8 @@
  */
 package punto.venta.misclases;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import punto.venta.dao.TicketDAO;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -25,6 +27,9 @@ import javax.print.attribute.standard.ColorSupported;
 import javax.print.attribute.standard.PrinterName;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import punto.venta.configuracion.Configuracion;
+import punto.venta.dao.ConfiguracionDAO;
+import punto.venta.utilidades.Utilidades;
 
 /**
  *
@@ -36,9 +41,11 @@ public class ImprimirTicket {
  DateFormat formatoFecha = new SimpleDateFormat("dd, MMM yyyy");
  DateFormat formatoHora = new SimpleDateFormat("HH:mm:ss");
  TicketDAO ticket = new TicketDAO();
+ ConfiguracionDAO configuracion = new ConfiguracionDAO();
  
-    public void imprimirTicket(String prueba) {
+    public void imprimirTicket(String prueba)  {
         try {
+            String[] d= recuperarDatos();
             byte[] bytes = prueba.getBytes();
             //Formato de Documento
 //DocFlavor docFormat = DocFlavor.INPUT_STREAM.AUTOSENSE;
@@ -46,7 +53,8 @@ public class ImprimirTicket {
 //Lectura de Documento
             Doc document = new SimpleDoc(bytes, docFormat, null);
 //Nombre de la impresora
-            String printerName = "58mm Series Printer";
+            String printerName = d[0];
+            System.out.println("Nombre de la impresora " + printerName);
 //Inclusion del nombre de impresora y sus atributos
             AttributeSet attributeSet = new HashAttributeSet();
             attributeSet.add(new PrinterName(printerName, null));
@@ -56,7 +64,15 @@ public class ImprimirTicket {
 //Busqueda de la impresora por el nombre asignado en attributeSet
             PrintService[] services = PrintServiceLookup.lookupPrintServices(docFormat, attributeSet);
             System.out.println("Imprimiendo en : " + services[0].getName());
-            DocPrintJob printJob = services[0].createPrintJob();
+            int r=0;
+            while(r<services.length){
+            if(services[r].getName().equalsIgnoreCase(d[0])){
+            break;
+            }
+            r++;
+            }
+            Utilidades.im("Desde el services " + services[r].getName());
+            DocPrintJob printJob = services[r].createPrintJob();
 //Envio a la impresora
             printJob.print(document, new HashPrintRequestAttributeSet());
         } catch (PrintException ex) {
@@ -67,11 +83,38 @@ public class ImprimirTicket {
         
     }
     
+       public String[] recuperarDatos(){
+            String a[] = new String[4];
+        try {
+            ResultSet datos=  configuracion.recuperarDatos();
+            // Impresora , Nombre, RFC , Direccion
+            String info="";
+           
+            while(datos.next()){
+                a[1]=datos.getString(3);
+                a[2]=datos.getString(4);
+                a[3]=datos.getString(5);
+                a[0]=datos.getString(2);
+            }
+            
+         
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Configuracion.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Configuracion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return a;
+    }
+    
     public String convertirModeloAString(DefaultTableModel model, String total){
     int numTic = ticket.getNumero();
-        String titulo = "        Punto de venta \n"
-        + "     Fecha: "+formatoFecha.format(d)+"\n"
-               + "        Hora: "+formatoHora.format(d)+" \n"
+    String d[] = recuperarDatos();
+    
+        String titulo = " "+d[1]+" \n"
+         +       " "+d[2]+" \n"
+        + "     Fecha: "+d+"\n"
+               + "        Hora: "+d+" \n"
          +       "     Num. de Ticket: "+numTic+" \n"
                   +       "============================== \n"
          +       "Cant.   Descripcion      Importe  \n";

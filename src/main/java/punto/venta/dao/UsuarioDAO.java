@@ -37,6 +37,7 @@ public class UsuarioDAO {
     private static String tipo;
     private static String hora;
     private static String fecha;
+  
      BitacoraDAO bita = new BitacoraDAO();
     Confirmacion confir;
   

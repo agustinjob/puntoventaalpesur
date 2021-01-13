@@ -14,6 +14,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.ImageIcon;
+import punto.venta.configuracion.Configuracion;
 import punto.venta.dao.UsuarioDAO;
 import punto.venta.dialogos.Confirmacion;
 import punto.venta.dialogos.EntradaEfectivo;
@@ -35,6 +36,7 @@ public class Estructura extends javax.swing.JFrame implements ActionListener, Ke
     TransferirEstructura transferir = new TransferirEstructura();
     CorteEstructura corte = new CorteEstructura();
     NubeEstructura nube = new NubeEstructura();
+    Configuracion confi = new Configuracion();
     Confirmacion confir;
 
     public Estructura() {
@@ -50,6 +52,7 @@ public class Estructura extends javax.swing.JFrame implements ActionListener, Ke
         btnCorte.addActionListener(this);
         btnNube.addActionListener(this);
         btnConfiguracion.addActionListener(this);
+        
         addKeyListener(this);
         setFocusable(true);
         setFocusTraversalKeysEnabled(false);
@@ -250,6 +253,7 @@ public class Estructura extends javax.swing.JFrame implements ActionListener, Ke
             transferir.setVisible(false);
             nube.setVisible(false);
             corte.setVisible(false);
+            confi.setVisible(false);
             contenedor.add(objVentas);
             contenedor.validate();
 
@@ -265,6 +269,7 @@ public class Estructura extends javax.swing.JFrame implements ActionListener, Ke
             productos.setVisible(false);
             transferir.setVisible(false);
             corte.setVisible(false);
+            confi.setVisible(false);
             inventarios.asignaPrimerContenedor();
             contenedor.add(inventarios);
             contenedor.validate();
@@ -279,6 +284,7 @@ public class Estructura extends javax.swing.JFrame implements ActionListener, Ke
             productos.setVisible(false);
             transferir.setVisible(false);
             corte.setVisible(false);
+            confi.setVisible(false);
             clientes.ocultarEstadoInformacion();
             contenedor.add(clientes);
             contenedor.validate();
@@ -292,6 +298,7 @@ public class Estructura extends javax.swing.JFrame implements ActionListener, Ke
             productos.setVisible(false);
             transferir.setVisible(false);
             corte.setVisible(false);
+            confi.setVisible(false);
             contenedor.add(usuarios);
             contenedor.validate();
 
@@ -304,6 +311,7 @@ public class Estructura extends javax.swing.JFrame implements ActionListener, Ke
             productos.setVisible(true);
             transferir.setVisible(false);
             corte.setVisible(false);
+            confi.setVisible(false);
             contenedor.add(productos);
             contenedor.validate();
 
@@ -315,6 +323,7 @@ public class Estructura extends javax.swing.JFrame implements ActionListener, Ke
             usuarios.setVisible(false);
             productos.setVisible(false);
             transferir.setVisible(true);
+            confi.setVisible(false);
             transferir.limpiarDatos();
             transferir.llenarCombo();
             corte.setVisible(false);
@@ -329,6 +338,7 @@ public class Estructura extends javax.swing.JFrame implements ActionListener, Ke
             usuarios.setVisible(false);
             productos.setVisible(false);
             transferir.setVisible(false);
+            confi.setVisible(false);
             corte.setVisible(true);
             contenedor.add(corte);
             contenedor.validate();
@@ -342,8 +352,24 @@ public class Estructura extends javax.swing.JFrame implements ActionListener, Ke
             productos.setVisible(false);
             transferir.setVisible(false);
             corte.setVisible(false);
+            confi.setVisible(false);
             contenedor.add(nube);
             contenedor.validate();
+        }else if (evt.equals(btnConfiguracion)){
+        confi.setVisible(true);
+        confi.llenarCombo();
+        confi.llenarDatos();
+        objVentas.setVisible(false);
+            nube.setVisible(false);
+            inventarios.setVisible(false);
+            clientes.setVisible(false);
+            usuarios.setVisible(false);
+            productos.setVisible(false);
+            transferir.setVisible(false);
+            corte.setVisible(false);
+             contenedor.add(confi);
+            contenedor.validate();
+        
         }
     }
 

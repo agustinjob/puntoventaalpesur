@@ -5,6 +5,7 @@
  */
 package punto.venta.ventanas;
 
+import bd.PanelTabla;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -49,12 +50,14 @@ public class VentasEstructura extends javax.swing.JPanel implements ActionListen
     DefaultTableCellRenderer dt = new DefaultTableCellRenderer();
     static int tipoPrecio;
     private Usuario usu;
-    public double total = 0.0d;
-    public int numeroArticulos = 0;
+   // public double total[] = new double[5];
+    //public int numeroArticulos[] = new int [5];
     TicketDAO tick = new TicketDAO();
     Confirmacion confir;
     private Dimension dim;
     Estructura e;
+    public PanelTabla tablas[] = new PanelTabla[5];
+    int ultimaPestanaSeleccionada=0;
 
     public VentasEstructura() {
         initComponents();
@@ -62,7 +65,7 @@ public class VentasEstructura extends javax.swing.JPanel implements ActionListen
         btn1.setEnabled(false);
         tipoPrecio = 1;
         md = new DefaultTableModel();
-        this.txtTabla.setModel(md);
+     //   this.txtTabla.setModel(md);
         txtCodigo.requestFocus();
         md = new DefaultTableModel(data, cabeza) {
             @Override
@@ -72,20 +75,43 @@ public class VentasEstructura extends javax.swing.JPanel implements ActionListen
         };
         inicializarIconos();
         txtTicket.setText("Folio del ticket: " + tick.getNumero());
-        centrarValoresTabla();
+    //    centrarValoresTabla();
       //  this.setFocusTraversalKeysEnabled(true);
      //   this.setFocusable(true);
       //  this.requestFocus();
         addKeyListener(this);
         Utilidades.im("Entro a ventas");
         Utilidades.im(""+this.hasFocus());
-        
+        inicializaTabbed();
         
     }
     
-public void setEstructura(Estructura e){
-this.e=e;
-}
+    public void inicializaTabbed(){
+    tablas[0]= new PanelTabla(txtTotal);
+    tablas[1]= new PanelTabla(txtTotal);
+    tablas[2]= new PanelTabla(txtTotal);
+    tablas[3]= new PanelTabla(txtTotal);
+    tablas[4]= new PanelTabla(txtTotal);
+   // total[0]=0.0d;
+   // total[1]=0.0d;
+   // total[2]=0.0d;
+   // total[3]=0.0d;
+   /* total[4]=0.0d;
+    numeroArticulos[0]=0;
+    numeroArticulos[1]=0;
+    numeroArticulos[2]=0;
+    numeroArticulos[3]=0;
+    numeroArticulos[4]=0;*/
+    jTabbedPane1.addTab("Ticket A", tablas[0]);
+    jTabbedPane1.addTab("Ticket B", tablas[1]);
+    jTabbedPane1.addTab("Ticket C", tablas[2]);
+    jTabbedPane1.addTab("Ticket D", tablas[3]);
+    jTabbedPane1.addTab("Ticket E", tablas[4]);
+    }
+    
+    public void setEstructura(Estructura e){
+    this.e=e;
+                                            }
     public void actualizaTicket(String tik) {
         txtTicket.setText("Folio del ticket: " + tik);
         txtTotal.setText("");
@@ -110,7 +136,7 @@ this.e=e;
 
     }
 
-    public void centrarValoresTabla() {
+   /* public void centrarValoresTabla() {
         JTableHeader tablaCabe = txtTabla.getTableHeader();
         DefaultTableCellRenderer render = (DefaultTableCellRenderer) txtTabla.getTableHeader().getDefaultRenderer();
         render.setHorizontalAlignment(SwingConstants.CENTER);
@@ -129,10 +155,11 @@ this.e=e;
         txtTabla.getColumnModel().getColumn(6).setMinWidth(0);
         txtTabla.getColumnModel().getColumn(6).setMaxWidth(0);
         txtTabla.setRowHeight(30);
-    }
+    }*/
 
     public boolean revisarRepetidos(String codigo) {
-        DefaultTableModel modelo = (DefaultTableModel) txtTabla.getModel();
+      
+        DefaultTableModel modelo = (DefaultTableModel) tablas[jTabbedPane1.getSelectedIndex()].getTabla().getModel();
         int i = 0;
 
         while (i < modelo.getRowCount()) {
@@ -145,9 +172,9 @@ this.e=e;
                 double to = precio * numero;
                 modelo.setValueAt(numero + "", i, 3);
                 modelo.setValueAt(to + "", i, 4);
-                total = total + precio;
-                txtTotal.setText(total + "");
-                numeroArticulos = numeroArticulos + 1;
+                tablas[jTabbedPane1.getSelectedIndex()].setTotal(tablas[jTabbedPane1.getSelectedIndex()].getTotal() + precio);
+                txtTotal.setText(tablas[jTabbedPane1.getSelectedIndex()].getTotal() + "");
+                tablas[jTabbedPane1.getSelectedIndex()].setNumArticulos(tablas[jTabbedPane1.getSelectedIndex()].getNumArticulos() + 1);
                 return true;
             }
             i++;
@@ -157,18 +184,18 @@ this.e=e;
 
     public void eliminaCelda(int tipoEliminacion) {
         System.out.println("antes del model");
-        DefaultTableModel tm = (DefaultTableModel) txtTabla.getModel();
+        DefaultTableModel tm = (DefaultTableModel) tablas[jTabbedPane1.getSelectedIndex()].getTabla().getModel();
         System.out.println("despues del modelo en tipo eliminacion");
         if (tipoEliminacion == 1) {
-            if (txtTabla.getSelectedRow() >= 0) {
-                if (txtTabla.getValueAt(txtTabla.getSelectedRow(), 0) == null) {
+            if (tablas[jTabbedPane1.getSelectedIndex()].getTabla().getSelectedRow() >= 0) {
+                if (tablas[jTabbedPane1.getSelectedIndex()].getTabla().getValueAt(tablas[jTabbedPane1.getSelectedIndex()].getTabla().getSelectedRow(), 0) == null) {
                     JOptionPane.showMessageDialog(this, "La fila que selecciono ,no cuenta con ningún producto", "Alexito", JOptionPane.WARNING_MESSAGE);
                 } else {
 
-                    double resta = Double.parseDouble((String) tm.getValueAt(txtTabla.getSelectedRow(), 4));
-                    total = total - resta;
-                    tm.removeRow(txtTabla.getSelectedRow());
-                    txtTotal.setText(total + "");
+                    double resta = Double.parseDouble((String) tm.getValueAt(tablas[jTabbedPane1.getSelectedIndex()].getTabla().getSelectedRow(), 4));
+                     tablas[jTabbedPane1.getSelectedIndex()].setTotal(tablas[jTabbedPane1.getSelectedIndex()].getTotal()-resta); 
+                    tm.removeRow(tablas[jTabbedPane1.getSelectedIndex()].getTabla().getSelectedRow());
+                    txtTotal.setText(tablas[jTabbedPane1.getSelectedIndex()].getTotal() + "");
                 }
             } else {
                 Utilidades.confirma(confir, "No haz seleccionado ninguna fila");
@@ -186,7 +213,7 @@ this.e=e;
     }
 
     
-   
+ /*  
     public void actualizarImporteTabla() {
         DefaultTableModel tm = (DefaultTableModel) txtTabla.getModel();
         numeroArticulos = 0;
@@ -209,10 +236,10 @@ this.e=e;
 
         txtTotal.setText(total + "");
     }
-
+*/
     public boolean masCantidadQueInventario() {
 
-        DefaultTableModel model = (DefaultTableModel) txtTabla.getModel();
+        DefaultTableModel model = (DefaultTableModel) tablas[jTabbedPane1.getSelectedIndex()].getTabla().getModel();
         int i = 0;
         while (i < model.getRowCount()) {
             String cantidad = (String) model.getValueAt(i, 3);
@@ -245,8 +272,6 @@ this.e=e;
         jLabel5 = new javax.swing.JLabel();
         txtCodigo = new javax.swing.JTextField();
         txtagregar = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        txtTabla = new javax.swing.JTable();
         txtTicket = new javax.swing.JLabel();
         panelSuperiorBotones = new javax.swing.JPanel();
         btn3 = new javax.swing.JButton();
@@ -262,6 +287,7 @@ this.e=e;
         btn8 = new javax.swing.JButton();
         txtTotal = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
 
         setBackground(new java.awt.Color(255, 255, 255));
         addMouseListener(new java.awt.event.MouseAdapter() {
@@ -290,7 +316,7 @@ this.e=e;
             .addGroup(panelTicketLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(1221, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelTicketLayout.setVerticalGroup(
             panelTicketLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -358,33 +384,6 @@ this.e=e;
                     .addComponent(txtagregar, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 16, Short.MAX_VALUE))
         );
-
-        jScrollPane1.setBorder(null);
-
-        txtTabla.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        txtTabla.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
-        txtTabla.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {"1", "Pruieba Producto", "10", "10", "10", "10"}
-            },
-            new String [] {
-                "Código de barras ", "Descripción del Producto", "Precio Venta", "Cant", "Importe", "Existencia"
-            }
-        ));
-        txtTabla.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
-        txtTabla.setAutoscrolls(false);
-        txtTabla.setColumnSelectionAllowed(true);
-        txtTabla.setDropMode(javax.swing.DropMode.ON);
-        txtTabla.setGridColor(new java.awt.Color(255, 255, 255));
-        txtTabla.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        txtTabla.setShowHorizontalLines(false);
-        txtTabla.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtTablaKeyPressed(evt);
-            }
-        });
-        jScrollPane1.setViewportView(txtTabla);
-        txtTabla.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
         txtTicket.setText("Folio ticket:");
 
@@ -546,27 +545,33 @@ this.e=e;
                 .addGap(22, 22, 22))
         );
 
+        jTabbedPane1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTabbedPane1MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(panelDevo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(panelDevo, javax.swing.GroupLayout.DEFAULT_SIZE, 499, Short.MAX_VALUE)
                                 .addGap(512, 512, 512))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(txtTicket)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(31, 31, 31))
-                    .addComponent(jScrollPane1)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 1369, Short.MAX_VALUE)
                     .addComponent(panelTicket, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panelSuperiorBotones, javax.swing.GroupLayout.PREFERRED_SIZE, 844, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(panelSuperiorBotones, javax.swing.GroupLayout.PREFERRED_SIZE, 844, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTabbedPane1)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -576,8 +581,8 @@ this.e=e;
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelSuperiorBotones, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -595,7 +600,8 @@ this.e=e;
         if (nombre.equalsIgnoreCase("")) {
             Utilidades.confirma(confir, "Por favor ingresa el nombre del producto");
         } else {
-            boolean bandera = revisarRepetidos(nombre);
+           md=(DefaultTableModel) tablas[jTabbedPane1.getSelectedIndex()].getTabla().getModel();
+           boolean bandera = revisarRepetidos(nombre);
             if (bandera == false) {
                 String[] info = new String[7];
                 info = obj.getProductoPorNombre(nombre, p, 1, tipoPrecio);
@@ -607,9 +613,10 @@ this.e=e;
                     double can = Double.parseDouble(info[5]);
                     if (can > 0) {
                         md.addRow(info);
-                        total = total + (Double.parseDouble(info[2]) * Double.parseDouble(info[3]));
-                        txtTotal.setText(total + "");
-                        numeroArticulos = numeroArticulos + 1;
+                       tablas[jTabbedPane1.getSelectedIndex()].setTotal(tablas[jTabbedPane1.getSelectedIndex()].getTotal() + (Double.parseDouble(info[2]) * Double.parseDouble(info[3])));
+                      //  tablas[jTabbedPane1.getSelectedIndex()].setTotal(total[jTabbedPane1.getSelectedIndex()]);
+                        txtTotal.setText( tablas[jTabbedPane1.getSelectedIndex()].getTotal() + "");
+                       tablas[jTabbedPane1.getSelectedIndex()].setNumArticulos(tablas[jTabbedPane1.getSelectedIndex()].getNumArticulos() + 1);
                     } else {
                         Utilidades.confirma(confir, "El producto esta registrado pero su invenario esta en 0, por favor agregar más producto en la sección correspondiente");
                     }
@@ -629,7 +636,7 @@ this.e=e;
 
             Utilidades.confirma(confir, "Por favor ingresa un código");
         } else {
-            boolean bandera = revisarRepetidos(nombre);
+        /*    boolean bandera = revisarRepetidos(nombre);
             if (bandera == false) {
                 String[] info = new String[7];
                 info = obj.getProductoPorNombre(nombre, p, 1, tipoPrecio);
@@ -651,7 +658,7 @@ this.e=e;
                 }
 
             }
-            txtCodigo.setText("");
+            txtCodigo.setText("");*/
         }
 
     }//GEN-LAST:event_txtCodigoActionPerformed
@@ -683,75 +690,29 @@ this.e=e;
     }//GEN-LAST:event_btn5ActionPerformed
 
     private void btn6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn6ActionPerformed
-        eliminaCelda(1);
+         eliminaCelda(1);
 
-        if (numeroArticulos > 0)
-            numeroArticulos = numeroArticulos - 1;
+        if (tablas[jTabbedPane1.getSelectedIndex()].getNumArticulos() > 0)
+ tablas[jTabbedPane1.getSelectedIndex()].setNumArticulos(tablas[jTabbedPane1.getSelectedIndex()].getNumArticulos() - 1);
         
         e.requestFocus();
     }//GEN-LAST:event_btn6ActionPerformed
 
-    private void txtTablaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTablaKeyPressed
-       
-try{      
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            int row = txtTabla.getSelectedRow();
-            int column = txtTabla.getSelectedColumn();
-            double preci = Double.parseDouble(txtTabla.getValueAt(row, 2) + "");
-            if (column == 3) {// por cantidad
-                String can = (String) txtTabla.getValueAt(row, column);
-                double canti = Double.parseDouble(can);
-                double totalImporte = canti * preci;
-                txtTabla.setValueAt(totalImporte + "", row, 4);
-            }
-
-            if (column == 4) {// por importe
-                String imp = (String) txtTabla.getValueAt(row, column);
-                double impor = Double.parseDouble(imp);
-                double totalCanti = impor / preci;
-                txtTabla.setValueAt(totalCanti + "", row, 3);
-
-            }
-            actualizarImporteTabla();
-
-        }
-
-        if (evt.getKeyCode() == 107) {
-           sumarDeUno();
-        }
-        
-        if (evt.getKeyCode() == 109) {
-           restarDeUno();
-        }
-        if(evt.getKeyCode() == 127){
-          eliminaCelda(1);
-        }
-}catch(NumberFormatException exc){
-  Utilidades.confirma(confir, "Haz ingresado una letra u otro caracter en lugar de un número. Por favor revisa los datos ingresados");
-}
-
-if (txtTabla.getSelectedRow() >= 0) {
-}else{
-e.requestFocus();
-}
-
-    }//GEN-LAST:event_txtTablaKeyPressed
-
     
      public void sumarDeUno(){
       
-      String temp = (String) md.getValueAt(txtTabla.getSelectedRow(), 3);
-      double cantidad = Double.parseDouble(temp) + 1;
-      md.setValueAt(cantidad+"",txtTabla.getSelectedRow() , 3);
-      actualizarImporteTabla();
+  //    String temp = (String) md.getValueAt(txtTabla.getSelectedRow(), 3);
+    //  double cantidad = Double.parseDouble(temp) + 1;
+    //  md.setValueAt(cantidad+"",txtTabla.getSelectedRow() , 3);
+    //  actualizarImporteTabla();
     }
      
       public void restarDeUno(){
       
-      String temp = (String) md.getValueAt(txtTabla.getSelectedRow(), 3);
-      double cantidad = Double.parseDouble(temp) - 1;
-      md.setValueAt(cantidad+"",txtTabla.getSelectedRow() , 3);
-      actualizarImporteTabla();
+  //    String temp = (String) md.getValueAt(txtTabla.getSelectedRow(), 3);
+  //    double cantidad = Double.parseDouble(temp) - 1;
+  //    md.setValueAt(cantidad+"",txtTabla.getSelectedRow() , 3);
+  //    actualizarImporteTabla();
     }
      
     private void btnReiniciarFolioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReiniciarFolioActionPerformed
@@ -770,8 +731,8 @@ e.requestFocus();
 
     private void btn7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn7ActionPerformed
         eliminaCelda(2);
-        numeroArticulos = 0;
-        total = 0;
+        tablas[jTabbedPane1.getSelectedIndex()].setNumArticulos(0);
+      tablas[jTabbedPane1.getSelectedIndex()].setTotal(0);
         txtTotal.setText("");
     }//GEN-LAST:event_btn7ActionPerformed
 
@@ -782,23 +743,24 @@ e.requestFocus();
 
     
     public void realizaCobro(){
-            DefaultTableModel tm = (DefaultTableModel) txtTabla.getModel();
+           DefaultTableModel tm = (DefaultTableModel) tablas[jTabbedPane1.getSelectedIndex()].getTabla().getModel();
 
         if (tm.getRowCount() <= 0) {
             Utilidades.confirma(confir, "Por favor ingresa productos para realizar el cobro");
         } else {
             try{
             if (!masCantidadQueInventario()) {
-                Cobrar obj = new Cobrar(this,md);
+                Cobrar obj = new Cobrar(this,md,jTabbedPane1.getSelectedIndex());
                 obj.setVisible(true);
                 String info = txtTotal.getText();
                 Cobrar.txtn2.setText(info);
-                obj.numArticulos.setText(numeroArticulos + "");
+                obj.numArticulos.setText(tablas[jTabbedPane1.getSelectedIndex()].getNumArticulos() + "");
             }
             }catch(NumberFormatException e){
                 Utilidades.confirma(confir, "Ingresaste una letra u otro caracter en lugar de un número. Por favor revisa la información ingresada");
             }
         }
+
     }
     private void txtTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalActionPerformed
         // TODO add your handling code here:
@@ -811,9 +773,17 @@ e.requestFocus();
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         System.out.println("Dio Click");
-        txtTabla.clearSelection();
+     //   txtTabla.clearSelection();
         e.requestFocus();
     }//GEN-LAST:event_formMouseClicked
+
+    private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
+     Utilidades.im(jTabbedPane1.getSelectedIndex() + "");
+     if(ultimaPestanaSeleccionada != jTabbedPane1.getSelectedIndex()){
+         txtTotal.setText(""+tablas[jTabbedPane1.getSelectedIndex()].getTotal());
+         ultimaPestanaSeleccionada=jTabbedPane1.getSelectedIndex();
+     }
+    }//GEN-LAST:event_jTabbedPane1MouseClicked
     public void inicializarIconos() {
         System.out.println("Si entro aca");
 
@@ -864,12 +834,11 @@ e.requestFocus();
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel8;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JPanel panelDevo;
     private javax.swing.JPanel panelSuperiorBotones;
     private javax.swing.JPanel panelTicket;
     private javax.swing.JTextField txtCodigo;
-    private javax.swing.JTable txtTabla;
     private javax.swing.JLabel txtTicket;
     public static javax.swing.JTextField txtTotal;
     private javax.swing.JButton txtagregar;

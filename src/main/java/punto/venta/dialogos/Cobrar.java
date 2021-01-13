@@ -33,8 +33,9 @@ public class Cobrar extends javax.swing.JFrame {
     ArrayList<Cliente> c;
     Cliente cliente = new Cliente();
     int tipoVenta = 1; // Efectivo
+    int indexTabbed=0;
 
-    public Cobrar(VentasEstructura ven3, DefaultTableModel md) {
+    public Cobrar(VentasEstructura ven3, DefaultTableModel md,int indexTabbed) {
         initComponents();
         setTitle("Cobro");
         setLocationRelativeTo(null);
@@ -52,6 +53,7 @@ public class Cobrar extends javax.swing.JFrame {
         btn3.setIcon(f);
         this.ven3 = ven3;
         this.md = md;
+        this.indexTabbed = indexTabbed;
         panelClientes.setVisible(false);
         txtn1.requestFocus();
         llenarCombo();
@@ -505,9 +507,9 @@ public void imprimeTicket(){
                 ventas.registrarVenta(md, tipoVenta, idCliente);
                 String res = obj.convertirModeloAString(md, txtn2.getText());
                 obj.imprimirTicket(res);
-                ven3.eliminaCelda(2);
-                ven3.numeroArticulos = 0;
-                ven3.total = 0;
+               ven3.eliminaCelda(2);
+               ven3.tablas[indexTabbed].setNumArticulos(0);
+               ven3.tablas[indexTabbed].setTotal(0);// mod aqui
 
                 TicketDAO tick = new TicketDAO();
                 ven3.llenarCombo();
@@ -543,8 +545,8 @@ public void soloRegistraVenta(){
             if (ban == true) {
                 ventas.registrarVenta(md, tipoVenta, idCliente);
                 ven3.eliminaCelda(2);
-                ven3.numeroArticulos = 0;
-                ven3.total = 0;
+                ven3.tablas[indexTabbed].setNumArticulos(0);
+                ven3.tablas[indexTabbed].setTotal(0); // mod aqui
 
                 TicketDAO tick = new TicketDAO();
                 ven3.llenarCombo();

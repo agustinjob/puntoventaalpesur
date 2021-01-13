@@ -5,6 +5,7 @@
  */
 package punto.venta.pruebas;
 
+import java.util.ArrayList;
 import javax.print.PrintService;
 import javax.print.PrintServiceLookup;
 import javax.print.attribute.Attribute;
@@ -30,9 +31,20 @@ public class PrintExamples {
      */
     public static void main(String[] args) {
 
-        printAvailable();
+     /*   printAvailable();
         printDefault();
-        printByName("MiImpresora");
+        printByName("MiImpresora");*/
+   //  nombreImpresoras();
+    }
+    
+    public ArrayList<String> nombreImpresoras(){
+        ArrayList<String> p = new ArrayList();
+    PrintService[] services = PrintServiceLookup.lookupPrintServices(null, null);
+    for (PrintService printService : services) {
+        p.add(printService.getName());
+   // System.out.println(" ---- IMPRESORA: " + printService.getName());
+    }
+    return p;
     }
 
     public static void printAvailable() {
@@ -95,4 +107,6 @@ public class PrintExamples {
             System.out.println(printService.getName());
         }
     }
+    
+   
 }
