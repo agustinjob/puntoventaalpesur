@@ -27,10 +27,10 @@ public class EntradaEfectivo extends javax.swing.JFrame {
         initComponents();
         setTitle("Registro de Entradas de Efectivo");
         setLocationRelativeTo(null);
-        setIconImage(new ImageIcon("src/main/java/iconos/punto-de-venta.png").getImage());
-        ImageIcon a = new ImageIcon("src/main/java/iconos/check.png");
-        ImageIcon b = new ImageIcon("src/main/java/iconos/cancelar.png");
-        ImageIcon c = new ImageIcon("src/main/java/iconos/entradas_pasadas.png");
+        setIconImage(new ImageIcon("iconos/punto-de-venta.png").getImage());
+        ImageIcon a = new ImageIcon("iconos/check.png");
+        ImageIcon b = new ImageIcon("iconos/cancelar.png");
+        ImageIcon c = new ImageIcon("iconos/entradas_pasadas.png");
         btnguardaref.setIcon(a);
         btnc.setIcon(b);
         btnverEntradas.setIcon(c);

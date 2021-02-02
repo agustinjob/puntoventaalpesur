@@ -29,10 +29,10 @@ public class ProductoEstructura extends javax.swing.JPanel implements ActionList
         btnEliminar.addActionListener(this);
         btnVentas.addActionListener(this);
         contenedor.add(pAgregar);
-        ImageIcon guardar = new ImageIcon("src/main/java/iconos/agregar.png");
-        ImageIcon modificar = new ImageIcon("src/main/java/iconos/modificar_datos.png");
-        ImageIcon eliminar = new ImageIcon("src/main/java/iconos/bote_basura.png");
-        ImageIcon ventas = new ImageIcon("src/main/java/iconos/ventas_periodo.png");
+        ImageIcon guardar = new ImageIcon("iconos/agregar.png");
+        ImageIcon modificar = new ImageIcon("iconos/modificar_datos.png");
+        ImageIcon eliminar = new ImageIcon("iconos/bote_basura.png");
+        ImageIcon ventas = new ImageIcon("iconos/ventas_periodo.png");
         btnNuevo.setIcon(guardar);
         btnModificar.setIcon(modificar);
         btnEliminar.setIcon(eliminar);
@@ -54,6 +54,7 @@ public class ProductoEstructura extends javax.swing.JPanel implements ActionList
         jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
+        setPreferredSize(new java.awt.Dimension(1109, 540));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new java.awt.GridLayout(1, 0));
@@ -119,7 +120,7 @@ public class ProductoEstructura extends javax.swing.JPanel implements ActionList
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 382, Short.MAX_VALUE))
+                .addGap(0, 389, Short.MAX_VALUE))
             .addComponent(contenedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(panelTicket, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -130,8 +131,8 @@ public class ProductoEstructura extends javax.swing.JPanel implements ActionList
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(contenedor, javax.swing.GroupLayout.PREFERRED_SIZE, 522, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(contenedor, javax.swing.GroupLayout.PREFERRED_SIZE, 446, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(49, 49, 49))
         );
     }// </editor-fold>//GEN-END:initComponents
 

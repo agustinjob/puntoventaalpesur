@@ -39,13 +39,13 @@ public class Cobrar extends javax.swing.JFrame {
         initComponents();
         setTitle("Cobro");
         setLocationRelativeTo(null);
-        ImageIcon a = new ImageIcon("src/main/java/iconos/dinero33.png");
-        ImageIcon d = new ImageIcon("src/main/java/iconos/impresora.png");
-        ImageIcon e = new ImageIcon("src/main/java/iconos/facturar_ticket.png");
-        ImageIcon f = new ImageIcon("src/main/java/iconos/cancelar.png");
-        ImageIcon g = new ImageIcon("src/main/java/iconos/hoja.png");
-        ImageIcon cli = new ImageIcon("src/main/java/iconos/clientesGrande.png");
-        setIconImage(new ImageIcon("src/main/java/iconos/punto-de-venta.png").getImage());
+        ImageIcon a = new ImageIcon("iconos/dinero33.png");
+        ImageIcon d = new ImageIcon("iconos/impresora.png");
+        ImageIcon e = new ImageIcon("iconos/facturar_ticket.png");
+        ImageIcon f = new ImageIcon("iconos/cancelar.png");
+        ImageIcon g = new ImageIcon("iconos/hoja.png");
+        ImageIcon cli = new ImageIcon("iconos/clientesGrande.png");
+        setIconImage(new ImageIcon("iconos/punto-de-venta.png").getImage());
         btnefectivo.setIcon(a);
         btnCredito.setIcon(cli);
         btn1.setIcon(d);
@@ -322,8 +322,8 @@ public class Cobrar extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(panelClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addGap(134, 134, 134)
-                        .addComponent(txtn2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(26, 26, 26)
+                        .addComponent(txtn2, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
         jPanel10Layout.setVerticalGroup(

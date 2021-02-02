@@ -29,7 +29,7 @@ public class EfectivoInicial extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Efectivo inicial");
-        ImageIcon bille = new ImageIcon("src/main/java/iconos/billetes.png");
+        ImageIcon bille = new ImageIcon("iconos/billetes.png");
         btnRegistrar.setIcon(bille);
         
     }

@@ -26,7 +26,7 @@ public class LiquidarAdeudo extends javax.swing.JFrame {
     public LiquidarAdeudo(String monto, Cliente cli, ClienteEstadoInformacion cEI) {
         initComponents();
         setLocationRelativeTo(null);
-        ImageIcon icon = new ImageIcon("src/main/java/iconos/ticket.png");
+        ImageIcon icon = new ImageIcon("iconos/ticket.png");
         icoTicket.setIcon(icon);
         this.cli = cli;
         lblAdeudo.setText(monto);

@@ -18,11 +18,11 @@ public class NubeEstructura extends javax.swing.JPanel {
      */
     public NubeEstructura() {
         initComponents();
-        ImageIcon nube= new ImageIcon("src/main/java/iconos/servidorChico.png");
-        ImageIcon local = new ImageIcon("src/main/java/iconos/tienda.png");
-        ImageIcon nube2 = new ImageIcon("src/main/java/iconos/computacion-en-la-nube.png");
+        ImageIcon nube= new ImageIcon("iconos/servidorChico.png");
+        ImageIcon local = new ImageIcon("iconos/tienda.png");
+        ImageIcon nube2 = new ImageIcon("iconos/computacion-en-la-nube.png");
         imagen.setIcon(nube2);
-        btnLocal.setIcon(local);
+      //  btnLocal.setIcon(local);
         btnNube.setIcon(nube);
     }
 
@@ -36,9 +36,7 @@ public class NubeEstructura extends javax.swing.JPanel {
     private void initComponents() {
 
         btnNube = new javax.swing.JButton();
-        btnLocal = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         panelTicket = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         imagen = new javax.swing.JLabel();
@@ -49,17 +47,9 @@ public class NubeEstructura extends javax.swing.JPanel {
         btnNube.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnNube.setText("Actualizar sistema en la nube");
 
-        btnLocal.setBackground(new java.awt.Color(255, 153, 153));
-        btnLocal.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        btnLocal.setText("Actualizar sistema local");
-
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(153, 0, 0));
         jLabel1.setText("Sistema en la nube");
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(153, 0, 0));
-        jLabel2.setText("Sistema local");
 
         panelTicket.setBackground(new java.awt.Color(255, 153, 51));
 
@@ -91,24 +81,17 @@ public class NubeEstructura extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(panelTicket, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(61, 61, 61)
-                                .addComponent(imagen, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnLocal, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(131, 131, 131))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnNube, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel2)
-                        .addGap(255, 255, 255))))
+                        .addGap(71, 71, 71)
+                        .addComponent(imagen, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(343, 343, 343)
+                        .addComponent(btnNube, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(409, 409, 409)
+                        .addComponent(jLabel1)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -116,25 +99,19 @@ public class NubeEstructura extends javax.swing.JPanel {
                 .addComponent(panelTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(imagen, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(77, 77, 77)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnNube, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2)
                 .addGap(18, 18, 18)
-                .addComponent(btnLocal, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(212, 212, 212))
+                .addComponent(btnNube, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(241, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnLocal;
     private javax.swing.JButton btnNube;
     private javax.swing.JLabel imagen;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel panelTicket;
     // End of variables declaration//GEN-END:variables

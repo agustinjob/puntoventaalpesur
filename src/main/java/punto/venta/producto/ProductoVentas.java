@@ -29,8 +29,8 @@ public class ProductoVentas extends javax.swing.JPanel {
    
     public ProductoVentas() {
         initComponents();
-        ImageIcon lupa = new ImageIcon("src/main/java/iconos/lupa.png");
-        ImageIcon excel = new ImageIcon("src/main/java/iconos/excel.png");
+        ImageIcon lupa = new ImageIcon("iconos/lupa.png");
+        ImageIcon excel = new ImageIcon("iconos/excel.png");
         btnGenerarExcel.setIcon(excel);
         btnBuscar.setIcon(lupa);
         btnBuscarLapso.setIcon(lupa);

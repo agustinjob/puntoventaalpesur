@@ -29,8 +29,8 @@ public class InventarioAgregar extends javax.swing.JPanel {
     
     public InventarioAgregar() {
         initComponents();
-        ImageIcon lupa = new ImageIcon("src/main/java/iconos/lupa.png");
-        ImageIcon agregar = new ImageIcon("src/main/java/iconos/check.png");
+        ImageIcon lupa = new ImageIcon("iconos/lupa.png");
+        ImageIcon agregar = new ImageIcon("iconos/check.png");
         btnBuscar.setIcon(lupa);
         btnAgregar.setIcon(agregar);
         llenarCombo();

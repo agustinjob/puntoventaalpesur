@@ -28,7 +28,7 @@ public class Abono extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
       //  setDefaultCloseOperation(this.DO_NOTHING_ON_CLOSE); 
-        ImageIcon mone = new ImageIcon("src/main/java/iconos/oro.png");
+        ImageIcon mone = new ImageIcon("iconos/oro.png");
         Utilidades.im("RESTOO " + resto);
         monedas.setIcon(mone);
         this.cre = cre;

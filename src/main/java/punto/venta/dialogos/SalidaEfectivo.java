@@ -25,10 +25,10 @@ public class SalidaEfectivo extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Registro de salidas de efectivo");
-        setIconImage(new ImageIcon("src/main/java/iconos/punto-de-venta.png").getImage());
-        ImageIcon a = new ImageIcon("src/main/java/iconos/check.png");
-        ImageIcon b = new ImageIcon("src/main/java/iconos/cancelar.png");
-        ImageIcon c = new ImageIcon("src/main/java/iconos/entradas_pasadas.png");
+        setIconImage(new ImageIcon("iconos/punto-de-venta.png").getImage());
+        ImageIcon a = new ImageIcon("iconos/check.png");
+        ImageIcon b = new ImageIcon("iconos/cancelar.png");
+        ImageIcon c = new ImageIcon("iconos/entradas_pasadas.png");
         btnguardar.setIcon(a);
         btncancelar.setIcon(b);
         btnversalidas.setIcon(c);

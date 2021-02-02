@@ -33,10 +33,10 @@ public class ClienteEstructura extends javax.swing.JPanel implements ActionListe
     }
 
     public void configurarIconos(){
-     ImageIcon icoNue = new ImageIcon("src/main/java/iconos/cliente_nuevo.png");
-     ImageIcon icoMod = new ImageIcon("src/main/java/iconos/modificar_cliente.png");
-     ImageIcon icoEli = new ImageIcon("src/main/java/iconos/eliminar_cliente.png");
-     ImageIcon icoEsta = new ImageIcon("src/main/java/iconos/documentos.png");
+     ImageIcon icoNue = new ImageIcon("iconos/cliente_nuevo.png");
+     ImageIcon icoMod = new ImageIcon("iconos/modificar_cliente.png");
+     ImageIcon icoEli = new ImageIcon("iconos/eliminar_cliente.png");
+     ImageIcon icoEsta = new ImageIcon("iconos/documentos.png");
      btnNuevo.setIcon(icoNue);
      btnModificar.setIcon(icoMod);
      btnEliminar.setIcon(icoEli);

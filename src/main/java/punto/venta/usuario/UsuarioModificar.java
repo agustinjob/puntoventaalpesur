@@ -32,7 +32,7 @@ public class UsuarioModificar extends javax.swing.JPanel implements ActionListen
     public UsuarioModificar() {
         initComponents();
         formulario.setVisible(false);
-        ImageIcon check = new ImageIcon("src/main/java/iconos/check.png");
+        ImageIcon check = new ImageIcon("iconos/check.png");
         btnGuardar.setIcon(check);
         llenarCombo();
          AutoCompleteDecorator.decorate(comboUsuario, ObjectToStringConverter.DEFAULT_IMPLEMENTATION);

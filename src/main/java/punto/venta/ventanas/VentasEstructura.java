@@ -48,7 +48,7 @@ public class VentasEstructura extends javax.swing.JPanel implements ActionListen
     ProductoDAO obj = new ProductoDAO();
     ArrayList<Producto> p = new ArrayList();
     DefaultTableCellRenderer dt = new DefaultTableCellRenderer();
-    static int tipoPrecio;
+    public static int tipoPrecio;
     private Usuario usu;
    // public double total[] = new double[5];
     //public int numeroArticulos[] = new int [5];
@@ -92,6 +92,11 @@ public class VentasEstructura extends javax.swing.JPanel implements ActionListen
     tablas[2]= new PanelTabla(txtTotal);
     tablas[3]= new PanelTabla(txtTotal);
     tablas[4]= new PanelTabla(txtTotal);
+    tablas[0].setObjVentas(this);
+    tablas[1].setObjVentas(this);
+    tablas[2].setObjVentas(this);
+    tablas[3].setObjVentas(this);
+    tablas[4].setObjVentas(this);
    // total[0]=0.0d;
    // total[1]=0.0d;
    // total[2]=0.0d;
@@ -613,7 +618,10 @@ public class VentasEstructura extends javax.swing.JPanel implements ActionListen
                     double can = Double.parseDouble(info[5]);
                     if (can > 0) {
                         md.addRow(info);
+                        Utilidades.im("TOTAL AL MOMENTO " + tablas[jTabbedPane1.getSelectedIndex()].getTotal());
+                        Utilidades.im("Datos de suma: " + (tablas[jTabbedPane1.getSelectedIndex()].getTotal() + (Double.parseDouble(info[2]) * Double.parseDouble(info[3]))));
                        tablas[jTabbedPane1.getSelectedIndex()].setTotal(tablas[jTabbedPane1.getSelectedIndex()].getTotal() + (Double.parseDouble(info[2]) * Double.parseDouble(info[3])));
+                       
                       //  tablas[jTabbedPane1.getSelectedIndex()].setTotal(total[jTabbedPane1.getSelectedIndex()]);
                         txtTotal.setText( tablas[jTabbedPane1.getSelectedIndex()].getTotal() + "");
                        tablas[jTabbedPane1.getSelectedIndex()].setNumArticulos(tablas[jTabbedPane1.getSelectedIndex()].getNumArticulos() + 1);
@@ -632,11 +640,13 @@ public class VentasEstructura extends javax.swing.JPanel implements ActionListen
     private void txtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoActionPerformed
 
         String nombre = txtCodigo.getText();
+        
         if (nombre.equalsIgnoreCase("")) {
 
             Utilidades.confirma(confir, "Por favor ingresa un código");
         } else {
-        /*    boolean bandera = revisarRepetidos(nombre);
+            md=(DefaultTableModel) tablas[jTabbedPane1.getSelectedIndex()].getTabla().getModel();
+           boolean bandera = revisarRepetidos(nombre);
             if (bandera == false) {
                 String[] info = new String[7];
                 info = obj.getProductoPorNombre(nombre, p, 1, tipoPrecio);
@@ -647,10 +657,10 @@ public class VentasEstructura extends javax.swing.JPanel implements ActionListen
                     if (can > 0) {
                         md.addRow(info);
 
-                        total = total + (Double.parseDouble(info[2]) * Double.parseDouble(info[3]));
-
-                        txtTotal.setText(total + "");
-                        numeroArticulos = numeroArticulos + 1;
+                        tablas[jTabbedPane1.getSelectedIndex()].setTotal(tablas[jTabbedPane1.getSelectedIndex()].getTotal() + (Double.parseDouble(info[2]) * Double.parseDouble(info[3])));
+                      //  tablas[jTabbedPane1.getSelectedIndex()].setTotal(total[jTabbedPane1.getSelectedIndex()]);
+                        txtTotal.setText( tablas[jTabbedPane1.getSelectedIndex()].getTotal() + "");
+                       tablas[jTabbedPane1.getSelectedIndex()].setNumArticulos(tablas[jTabbedPane1.getSelectedIndex()].getNumArticulos() + 1);
                     } else {
                         Utilidades.confirma(confir, "El producto esta registrado pero su invenario esta en 0, por favor agregar más producto en la sección correspondiente");
 
@@ -658,7 +668,7 @@ public class VentasEstructura extends javax.swing.JPanel implements ActionListen
                 }
 
             }
-            txtCodigo.setText("");*/
+            txtCodigo.setText("");
         }
 
     }//GEN-LAST:event_txtCodigoActionPerformed
@@ -787,17 +797,17 @@ public class VentasEstructura extends javax.swing.JPanel implements ActionListen
     public void inicializarIconos() {
         System.out.println("Si entro aca");
 
-        ImageIcon e = new ImageIcon("src/main/java/iconos/ticket.png");
-        ImageIcon f = new ImageIcon("src/main/java/iconos/usuario.png");
-        ImageIcon enter = new ImageIcon("src/main/java/iconos/check.png");
-        ImageIcon aa = new ImageIcon("src/main/java/iconos/documentos.png");
-        ImageIcon bb = new ImageIcon("src/main/java/iconos/lupa.png");
-        ImageIcon ccc = new ImageIcon("src/main/java/iconos/estrella.png");
-        ImageIcon dd = new ImageIcon("src/main/java/iconos/ganancias_dinero.png");
-        ImageIcon ee = new ImageIcon("src/main/java/iconos/salida_dinero.png");
-        ImageIcon ff = new ImageIcon("src/main/java/iconos/bote_basura.png");
-        ImageIcon gg = new ImageIcon("src/main/java/iconos/carro_cobrar.png");
-        ImageIcon iconoCap = new ImageIcon("src/main/java/iconos/ico_cap.png");
+        ImageIcon e = new ImageIcon("iconos/ticket.png");
+        ImageIcon f = new ImageIcon("iconos/usuario.png");
+        ImageIcon enter = new ImageIcon("iconos/check.png");
+        ImageIcon aa = new ImageIcon("iconos/documentos.png");
+        ImageIcon bb = new ImageIcon("iconos/lupa.png");
+        ImageIcon ccc = new ImageIcon("iconos/estrella.png");
+        ImageIcon dd = new ImageIcon("iconos/ganancias_dinero.png");
+        ImageIcon ee = new ImageIcon("iconos/salida_dinero.png");
+        ImageIcon ff = new ImageIcon("iconos/bote_basura.png");
+        ImageIcon gg = new ImageIcon("iconos/carro_cobrar.png");
+        ImageIcon iconoCap = new ImageIcon("iconos/ico_cap.png");
 
         btn1.setIcon(aa);
         btnReiniciarFolio.setIcon(e);

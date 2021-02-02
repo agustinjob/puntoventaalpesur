@@ -24,7 +24,7 @@ public class Confirmacion extends javax.swing.JFrame {
         setDefaultCloseOperation(this.DO_NOTHING_ON_CLOSE); 
         setTitle("Mensaje del sistema");
         this.mensaje.setText("<html><div style='text-align: center;'>" +  mensaje + "</div></html>" );
-        ImageIcon cajaR = new ImageIcon("src/main/java/iconos/cajaRegistradora.png");
+        ImageIcon cajaR = new ImageIcon("iconos/cajaRegistradora.png");
         cajaRegistradora.setIcon(cajaR);
         
         

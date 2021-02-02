@@ -37,7 +37,7 @@ import punto.venta.utilidades.Utilidades;
  */
 public class ImprimirTicket {
     
- Date d = new Date();
+ Date da = new Date();
  DateFormat formatoFecha = new SimpleDateFormat("dd, MMM yyyy");
  DateFormat formatoHora = new SimpleDateFormat("HH:mm:ss");
  TicketDAO ticket = new TicketDAO();
@@ -96,7 +96,7 @@ public class ImprimirTicket {
                 a[3]=datos.getString(5);
                 a[0]=datos.getString(2);
             }
-            
+            System.out.println("ESTE ES EL RECUPERAR DATOOS " + a[0] + " " + a[2]);
          
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Configuracion.class.getName()).log(Level.SEVERE, null, ex);
@@ -111,10 +111,10 @@ public class ImprimirTicket {
     int numTic = ticket.getNumero();
     String d[] = recuperarDatos();
     
-        String titulo = " "+d[1]+" \n"
-         +       " "+d[2]+" \n"
-        + "     Fecha: "+d+"\n"
-               + "        Hora: "+d+" \n"
+        String titulo = " ===="+d[1]+"==== \n"
+         +       " Dirección:"+d[2]+". \n"
+        + "     Fecha: "+formatoFecha.format(da)+"\n"
+               + "        Hora: "+formatoHora.format(da)+" \n"
          +       "     Num. de Ticket: "+numTic+" \n"
                   +       "============================== \n"
          +       "Cant.   Descripcion      Importe  \n";
@@ -139,6 +139,7 @@ public class ImprimirTicket {
          +        "       Total : $"+total+"           \n"
          +        "   Gracias por su preferencia  \n\n\n";
         titulo = titulo + ultima;
+        System.out.println(titulo);
         return titulo;
     }
     // 6 cantidad

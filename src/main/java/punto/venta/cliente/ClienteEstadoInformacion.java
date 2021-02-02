@@ -41,8 +41,8 @@ public class ClienteEstadoInformacion extends javax.swing.JPanel {
     
     public ClienteEstadoInformacion() {
         initComponents();
-        ImageIcon abo = new ImageIcon("src/main/java/iconos/oro.png");
-        ImageIcon liq = new ImageIcon("src/main/java/iconos/ticket.png");
+        ImageIcon abo = new ImageIcon("iconos/oro.png");
+        ImageIcon liq = new ImageIcon("iconos/ticket.png");
         
         btnAbonar.setIcon(abo);
         btnLiquidar.setIcon(liq);
@@ -55,6 +55,7 @@ public class ClienteEstadoInformacion extends javax.swing.JPanel {
         limpiarTabla(tablaAbonos);
         totalAbonos=0;
         total=0;
+        lblTotal.setText("0");
     lblNombre.setText(c.getNombres());
     btnLiquidar.setEnabled(false);
     btnAbonar.setEnabled(false);
@@ -384,6 +385,7 @@ public class ClienteEstadoInformacion extends javax.swing.JPanel {
 
     private void btnAbonarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbonarActionPerformed
    double resto = total - totalAbonos;
+   Utilidades.im("Total " + total + " abonos " + totalAbonos);
         Abono objAb= new Abono(cre,resto,this,cli);
         objAb.setVisible(true);
         

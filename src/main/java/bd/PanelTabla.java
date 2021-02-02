@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.text.DecimalFormat;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -17,27 +18,34 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import punto.venta.dialogos.Confirmacion;
+import punto.venta.dialogos.EntradaEfectivo;
+import punto.venta.dialogos.SalidaEfectivo;
 import punto.venta.utilidades.Utilidades;
+import punto.venta.ventanas.VentasEstructura;
 import static punto.venta.ventanas.VentasEstructura.txtTotal;
 
 /**
  *
  * @author agus_
  */
-public class PanelTabla extends javax.swing.JPanel implements ActionListener,KeyListener {
+public class PanelTabla extends javax.swing.JPanel implements ActionListener, KeyListener {
 
     DefaultTableModel md;
     String data[][] = {};
     String cabeza[] = {"Código de barras", "Descripcion de producto", "Precio venta", "Cant", "importe", "Existencia", "Precio Costo"};
     int filas;
+    DecimalFormat df = new DecimalFormat("#.00");
+    private VentasEstructura objVentas;
+
     DefaultTableCellRenderer dt = new DefaultTableCellRenderer();
     public double total = 0.0d;
     public int numeroArticulos = 0;
     Confirmacion confir;
     JTextField txtTotalOb;
+
     public PanelTabla(JTextField txtTotalOb) {
         initComponents();
-         md = new DefaultTableModel();
+        md = new DefaultTableModel();
         this.txtTabla.setModel(md);
         md = new DefaultTableModel(data, cabeza) {
             @Override
@@ -45,12 +53,12 @@ public class PanelTabla extends javax.swing.JPanel implements ActionListener,Key
                 return column == 3 || column == 4 || column == 2 ? true : false;
             }
         };
-     this.txtTotalOb=txtTotalOb;
-          centrarValoresTabla();
-          addKeyListener(this);
+        this.txtTotalOb = txtTotalOb;
+        centrarValoresTabla();
+        addKeyListener(this);
     }
-    
-        public void centrarValoresTabla() {
+
+    public void centrarValoresTabla() {
         JTableHeader tablaCabe = txtTabla.getTableHeader();
         DefaultTableCellRenderer render = (DefaultTableCellRenderer) txtTabla.getTableHeader().getDefaultRenderer();
         render.setHorizontalAlignment(SwingConstants.CENTER);
@@ -71,7 +79,7 @@ public class PanelTabla extends javax.swing.JPanel implements ActionListener,Key
         txtTabla.setRowHeight(30);
     }
 
-    public JTable getTabla(){
+    public JTable getTabla() {
         return txtTabla;
     }
 
@@ -90,8 +98,8 @@ public class PanelTabla extends javax.swing.JPanel implements ActionListener,Key
         md.setValueAt(cantidad + "", txtTabla.getSelectedRow(), 3);
         actualizarImporteTabla();
     }
-    
-     public void actualizarImporteTabla() {
+
+    public void actualizarImporteTabla() {
         DefaultTableModel tm = (DefaultTableModel) txtTabla.getModel();
         numeroArticulos = 0;
         total = 0;
@@ -105,13 +113,15 @@ public class PanelTabla extends javax.swing.JPanel implements ActionListener,Key
                 tm.removeRow(i);
             } else {
                 double suma = precio * cantidad;
+
                 tm.setValueAt(suma + "", i, 4);
+
                 total = total + suma;
             }
 
         }
         Utilidades.im("Eliminando " + total);
-        txtTotalOb.setText(total + "");
+        txtTotalOb.setText(df.format(total) + "");
     }
 
     @SuppressWarnings("unchecked")
@@ -198,29 +208,52 @@ public class PanelTabla extends javax.swing.JPanel implements ActionListener,Key
             if (evt.getKeyCode() == 127) {
                 eliminaCelda(1);
             }
+            if (evt.getKeyCode() == 123) {
+                getObjVentas().realizaCobro();
+            }
+
+            if (evt.getKeyCode() == 122) {
+
+                if (VentasEstructura.tipoPrecio == 1) {
+                    Utilidades.confirma(confir, "Se ha activado el precio de mayoreo");
+                    VentasEstructura.tipoPrecio = 2;
+                } else {
+                    Utilidades.confirma(confir, "Se ha desactivado el precio de mayoreo");
+                    VentasEstructura.tipoPrecio = 1;
+                }
+            }
+
+            if (evt.getKeyCode() == 118) {
+                EntradaEfectivo objeto = new EntradaEfectivo();
+                objeto.setVisible(true);
+            }
+            if (evt.getKeyCode() == 119) {
+                SalidaEfectivo objeto = new SalidaEfectivo();
+                objeto.setVisible(true);
+            }
         } catch (NumberFormatException exc) {
             Utilidades.confirma(confir, "Haz ingresado una letra u otro caracter en lugar de un número. Por favor revisa los datos ingresados");
         }
 
-      
+
     }//GEN-LAST:event_txtTablaKeyPressed
 
-    public void setTotal(double total){
-    this.total=total;
+    public void setTotal(double total) {
+        this.total = Double.parseDouble(df.format(total));
     }
-    
-    public double getTotal(){
-    return total;
+
+    public double getTotal() {
+        return Double.parseDouble(df.format(total));
     }
-    
-    public void setNumArticulos(int numArticulos){
-    this.numeroArticulos=numArticulos;
+
+    public void setNumArticulos(int numArticulos) {
+        this.numeroArticulos = numArticulos;
     }
-    
-    public int getNumArticulos(){
-    return numeroArticulos;
+
+    public int getNumArticulos() {
+        return numeroArticulos;
     }
-    
+
     public void eliminaCelda(int tipoEliminacion) {
         System.out.println("antes del model");
         DefaultTableModel tm = (DefaultTableModel) txtTabla.getModel();
@@ -239,7 +272,7 @@ public class PanelTabla extends javax.swing.JPanel implements ActionListener,Key
                 }
             } else {
                 Utilidades.confirma(confir, "No haz seleccionado ninguna fila");
-                
+
             }
 
         } else {
@@ -275,5 +308,19 @@ public class PanelTabla extends javax.swing.JPanel implements ActionListener,Key
     @Override
     public void keyReleased(KeyEvent e) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     * @return the objVentas
+     */
+    public VentasEstructura getObjVentas() {
+        return objVentas;
+    }
+
+    /**
+     * @param objVentas the objVentas to set
+     */
+    public void setObjVentas(VentasEstructura objVentas) {
+        this.objVentas = objVentas;
     }
 }

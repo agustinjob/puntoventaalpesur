@@ -74,13 +74,14 @@ public class Estructura extends javax.swing.JFrame implements ActionListener, Ke
         btnVentas = new javax.swing.JButton();
         btnCliente = new javax.swing.JButton();
         btnProductos = new javax.swing.JButton();
-        btnInventario = new javax.swing.JButton();
         btnTransferir = new javax.swing.JButton();
         btnUsuario = new javax.swing.JButton();
-        btnCorte = new javax.swing.JButton();
         btnNube = new javax.swing.JButton();
+        btnInventario = new javax.swing.JButton();
+        btnCorte = new javax.swing.JButton();
         btnConfiguracion = new javax.swing.JButton();
         nombreUsuario = new javax.swing.JLabel();
+        btnCerrarSesion = new javax.swing.JButton();
         contenedor = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -123,14 +124,6 @@ public class Estructura extends javax.swing.JFrame implements ActionListener, Ke
         btnProductos.setPreferredSize(new java.awt.Dimension(135, 35));
         jPanel2.add(btnProductos);
 
-        btnInventario.setBackground(new java.awt.Color(0, 51, 102));
-        btnInventario.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
-        btnInventario.setForeground(new java.awt.Color(255, 255, 255));
-        btnInventario.setText("Inventario");
-        btnInventario.setBorder(null);
-        btnInventario.setPreferredSize(new java.awt.Dimension(135, 35));
-        jPanel2.add(btnInventario);
-
         btnTransferir.setBackground(new java.awt.Color(0, 51, 102));
         btnTransferir.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
         btnTransferir.setForeground(new java.awt.Color(255, 255, 255));
@@ -147,14 +140,6 @@ public class Estructura extends javax.swing.JFrame implements ActionListener, Ke
         btnUsuario.setPreferredSize(new java.awt.Dimension(135, 35));
         jPanel2.add(btnUsuario);
 
-        btnCorte.setBackground(new java.awt.Color(0, 51, 102));
-        btnCorte.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
-        btnCorte.setForeground(new java.awt.Color(255, 255, 255));
-        btnCorte.setText("Corte");
-        btnCorte.setBorder(null);
-        btnCorte.setPreferredSize(new java.awt.Dimension(135, 35));
-        jPanel2.add(btnCorte);
-
         btnNube.setBackground(new java.awt.Color(0, 51, 102));
         btnNube.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
         btnNube.setForeground(new java.awt.Color(255, 255, 255));
@@ -162,6 +147,22 @@ public class Estructura extends javax.swing.JFrame implements ActionListener, Ke
         btnNube.setBorder(null);
         btnNube.setPreferredSize(new java.awt.Dimension(135, 35));
         jPanel2.add(btnNube);
+
+        btnInventario.setBackground(new java.awt.Color(0, 51, 102));
+        btnInventario.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        btnInventario.setForeground(new java.awt.Color(255, 255, 255));
+        btnInventario.setText("Inventario");
+        btnInventario.setBorder(null);
+        btnInventario.setPreferredSize(new java.awt.Dimension(135, 35));
+        jPanel2.add(btnInventario);
+
+        btnCorte.setBackground(new java.awt.Color(0, 51, 102));
+        btnCorte.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        btnCorte.setForeground(new java.awt.Color(255, 255, 255));
+        btnCorte.setText("Corte");
+        btnCorte.setBorder(null);
+        btnCorte.setPreferredSize(new java.awt.Dimension(135, 35));
+        jPanel2.add(btnCorte);
 
         btnConfiguracion.setBackground(new java.awt.Color(0, 51, 102));
         btnConfiguracion.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
@@ -175,6 +176,16 @@ public class Estructura extends javax.swing.JFrame implements ActionListener, Ke
         nombreUsuario.setForeground(new java.awt.Color(255, 255, 255));
         nombreUsuario.setText("jLabel1");
 
+        btnCerrarSesion.setBackground(new java.awt.Color(0, 51, 102));
+        btnCerrarSesion.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnCerrarSesion.setForeground(new java.awt.Color(255, 255, 255));
+        btnCerrarSesion.setText("Cambiar");
+        btnCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCerrarSesionActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -187,6 +198,8 @@ public class Estructura extends javax.swing.JFrame implements ActionListener, Ke
                         .addGap(18, 18, 18)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnCerrarSesion)
+                        .addGap(18, 18, 18)
                         .addComponent(nombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -200,8 +213,10 @@ public class Estructura extends javax.swing.JFrame implements ActionListener, Ke
                         .addComponent(caja, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel3))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(nombreUsuario)
-                        .addGap(16, 16, 16)))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(nombreUsuario)
+                            .addComponent(btnCerrarSesion))
+                        .addGap(15, 15, 15)))
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -237,6 +252,12 @@ public class Estructura extends javax.swing.JFrame implements ActionListener, Ke
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
+        InicioSesion ini = new InicioSesion();
+        ini.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnCerrarSesionActionPerformed
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -374,21 +395,21 @@ public class Estructura extends javax.swing.JFrame implements ActionListener, Ke
     }
 
     public void inicializarIconos() {
-        ImageIcon registradora = new ImageIcon("src/main/java/iconos/comprar.png");
-        //src/main/java/iconos/comprar.png
-        ImageIcon cc = new ImageIcon("src/main/java/iconos/cancelar.png");
-        ImageIcon bc = new ImageIcon("src/main/java/iconos/boton_cerrar.png");
-        ImageIcon c = new ImageIcon("src/main/java/iconos/productos.png");
-        ImageIcon b = new ImageIcon("src/main/java/iconos/clientes.png");
-        ImageIcon d = new ImageIcon("src/main/java/iconos/inventario.png");
-        ImageIcon gg = new ImageIcon("src/main/java/iconos/carro_cobrar.png");
-        ImageIcon h = new ImageIcon("src/main/java/iconos/corte.png");
-        ImageIcon i = new ImageIcon("src/main/java/iconos/reportes.png");
-        ImageIcon j = new ImageIcon("src/main/java/iconos/intercambiar.png");
-        ImageIcon f = new ImageIcon("src/main/java/iconos/usuario.png");
-        ImageIcon e = new ImageIcon("src/main/java/iconos/ticket.png");
-        ImageIcon nubeIcon = new ImageIcon("src/main/java/iconos/servidorChico.png");
-        ImageIcon configuracion = new ImageIcon("src/main/java/iconos/engranajes.png");
+        ImageIcon registradora = new ImageIcon("iconos/comprar.png");
+        //iconos/comprar.png
+        ImageIcon cc = new ImageIcon("iconos/cancelar.png");
+        ImageIcon bc = new ImageIcon("iconos/boton_cerrar.png");
+        ImageIcon c = new ImageIcon("iconos/productos.png");
+        ImageIcon b = new ImageIcon("iconos/clientes.png");
+        ImageIcon d = new ImageIcon("iconos/inventario.png");
+        ImageIcon gg = new ImageIcon("iconos/carro_cobrar.png");
+        ImageIcon h = new ImageIcon("iconos/corte.png");
+        ImageIcon i = new ImageIcon("iconos/reportes.png");
+        ImageIcon j = new ImageIcon("iconos/intercambiar.png");
+        ImageIcon f = new ImageIcon("iconos/usuario.png");
+        ImageIcon e = new ImageIcon("iconos/ticket.png");
+        ImageIcon nubeIcon = new ImageIcon("iconos/servidorChico.png");
+        ImageIcon configuracion = new ImageIcon("iconos/engranajes.png");
 
         btnVentas.setIcon(gg);
         btnCliente.setIcon(b);
@@ -404,18 +425,16 @@ public class Estructura extends javax.swing.JFrame implements ActionListener, Ke
         String tipo = UsuarioDAO.getTipo();
         nombreUsuario.setText(Utilidades.regresarNombre());
         if (tipo.equalsIgnoreCase("Empleado")) {
-
             btnCliente.setEnabled(false);
             btnProductos.setEnabled(false);
             btnTransferir.setEnabled(false);
             btnUsuario.setEnabled(false);
-
             btnCliente.setVisible(false);
             btnProductos.setVisible(false);
             btnTransferir.setVisible(false);
             btnUsuario.setVisible(false);
-            btnInventario.setEnabled(false);
-            btnInventario.setVisible(false);
+            btnConfiguracion.setEnabled(false);
+            btnConfiguracion.setVisible(false);
             btnNube.setEnabled(false);
             btnNube.setVisible(false);
 
@@ -459,6 +478,7 @@ public class Estructura extends javax.swing.JFrame implements ActionListener, Ke
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCerrarSesion;
     private javax.swing.JButton btnCliente;
     private javax.swing.JButton btnConfiguracion;
     private javax.swing.JButton btnCorte;

@@ -22,7 +22,7 @@ public class UsuarioAgregar extends javax.swing.JPanel {
   
     public UsuarioAgregar() {
         initComponents();
-        ImageIcon check = new ImageIcon("src/main/java/iconos/check.png");
+        ImageIcon check = new ImageIcon("iconos/check.png");
         btnGuardar.setIcon(check);
         
     }

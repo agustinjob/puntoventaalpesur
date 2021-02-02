@@ -380,19 +380,19 @@ public class EstructuraGeneral extends javax.swing.JFrame implements ActionListe
       }
     }
     public void inicializarIconos() {
-           ImageIcon registradora = new ImageIcon("src/main/java/iconos/comprar.png");
-        //src/main/java/iconos/comprar.png
-        ImageIcon cc = new ImageIcon("src/main/java/iconos/cancelar.png");
-        ImageIcon bc = new ImageIcon("src/main/java/iconos/boton_cerrar.png");
-        ImageIcon c = new ImageIcon("src/main/java/iconos/productos.png");
-        ImageIcon b = new ImageIcon("src/main/java/iconos/clientes.png");
-        ImageIcon d = new ImageIcon("src/main/java/iconos/inventario.png");
-        ImageIcon gg = new ImageIcon("src/main/java/iconos/carro_cobrar.png");
-        ImageIcon h = new ImageIcon("src/main/java/iconos/corte.png");
-        ImageIcon i = new ImageIcon("src/main/java/iconos/reportes.png");
-        ImageIcon j = new ImageIcon("src/main/java/iconos/intercambiar.png");
-        ImageIcon f = new ImageIcon("src/main/java/iconos/usuario.png");
-        ImageIcon e = new ImageIcon("src/main/java/iconos/ticket.png");
+           ImageIcon registradora = new ImageIcon("iconos/comprar.png");
+        //iconos/comprar.png
+        ImageIcon cc = new ImageIcon("iconos/cancelar.png");
+        ImageIcon bc = new ImageIcon("iconos/boton_cerrar.png");
+        ImageIcon c = new ImageIcon("iconos/productos.png");
+        ImageIcon b = new ImageIcon("iconos/clientes.png");
+        ImageIcon d = new ImageIcon("iconos/inventario.png");
+        ImageIcon gg = new ImageIcon("iconos/carro_cobrar.png");
+        ImageIcon h = new ImageIcon("iconos/corte.png");
+        ImageIcon i = new ImageIcon("iconos/reportes.png");
+        ImageIcon j = new ImageIcon("iconos/intercambiar.png");
+        ImageIcon f = new ImageIcon("iconos/usuario.png");
+        ImageIcon e = new ImageIcon("iconos/ticket.png");
         
         btnVentas.setIcon(gg);
         btnCliente.setIcon(b);

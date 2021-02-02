@@ -7,6 +7,7 @@ package punto.venta.tabla;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.text.DecimalFormat;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
@@ -29,6 +30,7 @@ public class TablaVentas extends javax.swing.JPanel implements KeyListener {
     String data[][] = {};
     String cabeza[] = {"Código de barras", "Descripcion de producto", "Precio venta", "Cant", "importe", "Existencia", "Precio Costo"};
     int filas;
+     
     public double total = 0.0d;
     Estructura e;
     Confirmacion confir;

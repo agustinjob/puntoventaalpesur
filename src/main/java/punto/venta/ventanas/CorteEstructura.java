@@ -38,12 +38,12 @@ public class CorteEstructura extends javax.swing.JPanel {
         initComponents();
         corteDe.setVisible(false);
         deA.setVisible(false);
-        ImageIcon ima = new ImageIcon("src/main/java/iconos/corte_dia.png");
-        ImageIcon dinero = new ImageIcon("src/main/java/iconos/dinero_caja.png");
-        ImageIcon entrada = new ImageIcon("src/main/java/iconos/entradas_dinero.png");
-        ImageIcon salida = new ImageIcon("src/main/java/iconos/salida.png");
-        ImageIcon ventaTotal = new ImageIcon("src/main/java/iconos/ventas_totales.png");
-        ImageIcon gananciaTotal = new ImageIcon("src/main/java/iconos/ganacias.png");
+        ImageIcon ima = new ImageIcon("iconos/corte_dia.png");
+        ImageIcon dinero = new ImageIcon("iconos/dinero_caja.png");
+        ImageIcon entrada = new ImageIcon("iconos/entradas_dinero.png");
+        ImageIcon salida = new ImageIcon("iconos/salida.png");
+        ImageIcon ventaTotal = new ImageIcon("iconos/ventas_totales.png");
+        ImageIcon gananciaTotal = new ImageIcon("iconos/ganacias.png");
         txtEntrada.setIcon(entrada);
         txtSalida.setIcon(salida);
         txtDinero.setIcon(dinero);
@@ -86,6 +86,7 @@ public class CorteEstructura extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
+        setPreferredSize(new java.awt.Dimension(1401, 540));
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
         jPanel6.setPreferredSize(new java.awt.Dimension(1365, 450));
@@ -251,7 +252,7 @@ public class CorteEstructura extends javax.swing.JPanel {
                 .addGroup(PanelcorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtGanancia)
                     .addComponent(txtGananciaTotal))
-                .addContainerGap(269, Short.MAX_VALUE))
+                .addContainerGap(99, Short.MAX_VALUE))
         );
 
         deA.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
@@ -270,6 +271,7 @@ public class CorteEstructura extends javax.swing.JPanel {
         });
 
         panelTicket1.setBackground(new java.awt.Color(102, 0, 0));
+        panelTicket1.setPreferredSize(new java.awt.Dimension(139, 29));
 
         jLabel2.setBackground(new java.awt.Color(204, 204, 0));
         jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
@@ -284,7 +286,7 @@ public class CorteEstructura extends javax.swing.JPanel {
             .addGroup(panelTicket1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2)
-                .addContainerGap(1193, Short.MAX_VALUE))
+                .addContainerGap(1201, Short.MAX_VALUE))
         );
         panelTicket1Layout.setVerticalGroup(
             panelTicket1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -306,8 +308,8 @@ public class CorteEstructura extends javax.swing.JPanel {
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(deA)
                             .addComponent(corteDe, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(panelTicket1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Panelcor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Panelcor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panelTicket1, javax.swing.GroupLayout.PREFERRED_SIZE, 1399, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
@@ -322,21 +324,22 @@ public class CorteEstructura extends javax.swing.JPanel {
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(corteDe)
                             .addComponent(btnCorte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(30, 30, 30)
-                .addComponent(Panelcor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Panelcor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(101, 101, 101))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 1391, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 10, Short.MAX_VALUE))
+            .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 1401, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 732, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 519, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 120, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

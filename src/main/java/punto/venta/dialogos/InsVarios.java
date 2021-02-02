@@ -32,9 +32,9 @@ public class InsVarios extends javax.swing.JFrame {
             initComponents();
             setLocationRelativeTo(null);
             this.tipoPrecio = tipoPrecio;
-            ImageIcon a = new ImageIcon("src/main/java/iconos/check.png");
-            ImageIcon b = new ImageIcon("src/main/java/iconos/cancelar.png");
-            ImageIcon c = new ImageIcon("src/main/java/iconos/codigo_de_producto.png");
+            ImageIcon a = new ImageIcon("iconos/check.png");
+            ImageIcon b = new ImageIcon("iconos/cancelar.png");
+            ImageIcon c = new ImageIcon("iconos/codigo_de_producto.png");
             btna2.setIcon(a);
             btnb2.setIcon(b);
             l1.setIcon(c);

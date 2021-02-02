@@ -33,7 +33,7 @@ public class ClienteModificar extends javax.swing.JPanel {
         initComponents();
         formulario.setVisible(false);
         llenarCombo();
-        ImageIcon check = new ImageIcon("src/main/java/iconos/check.png");
+        ImageIcon check = new ImageIcon("iconos/check.png");
         btnModificar.setIcon(check);
         AutoCompleteDecorator.decorate(jComboBox1, ObjectToStringConverter.DEFAULT_IMPLEMENTATION);
         

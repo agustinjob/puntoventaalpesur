@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 import punto.venta.dao.ProductoDAO;
+import punto.venta.dao.UsuarioDAO;
 import punto.venta.dialogos.Confirmacion;
 import punto.venta.misclases.CrearExcel;
 import punto.venta.utilidades.Utilidades;
@@ -23,71 +24,76 @@ import punto.venta.utilidades.Utilidades;
  */
 public class InventarioDatos extends javax.swing.JPanel {
 
- 
     ProductoDAO p = new ProductoDAO();
     Confirmacion x;
     NumberFormat formatoImporte = NumberFormat.getCurrencyInstance();
-     
+
     public InventarioDatos() {
         initComponents();
-        ImageIcon billetes = new ImageIcon("src/main/java/iconos/billetes.png");
-        ImageIcon excel = new ImageIcon("src/main/java/iconos/excel.png");
+        ImageIcon billetes = new ImageIcon("iconos/billetes.png");
+        ImageIcon excel = new ImageIcon("iconos/excel.png");
         txtBilletes.setIcon(billetes);
         btnInventarioExcel.setIcon(excel);
         llenarTabla();
     }
-    
-    public void limpiarTabla(){
-         DefaultTableModel tm = (DefaultTableModel) tablaPro.getModel();
-    int r = 0;
-            while (tm.getRowCount() > r) {
-                tm.removeRow(r);
-            }
+
+    public void limpiarTabla() {
+        DefaultTableModel tm = (DefaultTableModel) tablaPro.getModel();
+        int r = 0;
+        while (tm.getRowCount() > r) {
+            tm.removeRow(r);
+        }
     }
 
     public void llenarTabla() {
         limpiarTabla();
-        double preCos,preVen,utilidad;
+        double preCos, preVen, utilidad;
         preCos = preVen = utilidad = 0.0D;
-        
+
         try {
             DefaultTableModel model = (DefaultTableModel) tablaPro.getModel();
             ResultSet res = p.productosUtilidad();
             res.last();
             if (res.getRow() == 0) {
             } else {
-                String x [] = new String[10];
+                String x[] = new String[10];
                 res.beforeFirst();
-               int i = 1;
-                while(res.next()){
-                    x[0] = i+"";
-                    x[1]=res.getString(1);
-                 x[2]=res.getString(2);
-                    x[3]=res.getString(3);
-                    x[4]=res.getString(4);
-                    x[5]=res.getString(5);
-                    x[6]=res.getString(6);
-                    
-                    x[7]=res.getString(7);
+                int i = 1;
+                while (res.next()) {
+                    x[0] = i + "";
+                    x[1] = res.getString(1);
+                    x[2] = res.getString(2);
+                    x[3] = res.getString(3);
+                    x[4] = res.getString(4);
+                    x[5] = res.getString(5);
+                    x[6] = res.getString(6);
+
+                    x[7] = res.getString(7);
                     preCos = preCos + Double.parseDouble(res.getString(7));
-                    x[8]=res.getString(8);
+                    x[8] = res.getString(8);
                     preVen = preVen + Double.parseDouble(res.getString(8));
-                    x[9]=res.getString(9);
+                    x[9] = res.getString(9);
                     utilidad = utilidad + Double.parseDouble(res.getString(9));
                     model.addRow(x);
                     i++;
-                    
+
                 }
-                txtPreVen.setText(formatoImporte.format(preVen));
-                txtPreCos.setText(formatoImporte.format(preCos));
-                txtUtilidad.setText(formatoImporte.format(utilidad));
+                if (UsuarioDAO.getTipo().equalsIgnoreCase("empleado")) {
+                    txtPreVen.setText("");
+                    txtPreCos.setText("");
+                    txtUtilidad.setText("");
+                } else {
+                    txtPreVen.setText(formatoImporte.format(preVen));
+                    txtPreCos.setText(formatoImporte.format(preCos));
+                    txtUtilidad.setText(formatoImporte.format(utilidad));
+                }
             }
         } catch (SQLException ex) {
             Utilidades.confirma(x, "Hubo un error con la conexion a la base de datos");
         }
 
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -205,13 +211,13 @@ public class InventarioDatos extends javax.swing.JPanel {
 
     private void btnInventarioExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInventarioExcelActionPerformed
         try {
-            CrearExcel objE= new CrearExcel();
+            CrearExcel objE = new CrearExcel();
             objE.writeExcel();
             Utilidades.confirma(x, "Se genero el documento, buscalo en C:/inventario_punto_venta/inventario.xls");
         } catch (Exception ex) {
             Logger.getLogger(InventarioDatos.class.getName()).log(Level.SEVERE, null, ex);
         }
-   
+
     }//GEN-LAST:event_btnInventarioExcelActionPerformed
 
 

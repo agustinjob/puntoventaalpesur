@@ -25,9 +25,9 @@ public class InventarioEstructura extends javax.swing.JPanel implements ActionLi
         btnAgregar.addActionListener(this);
         btnBajos.addActionListener(this);
         btnDatos.addActionListener(this);
-        ImageIcon agregar = new ImageIcon("src/main/java/iconos/agregar.png");
-        ImageIcon inventario = new ImageIcon("src/main/java/iconos/inventario.png");
-        ImageIcon reporte = new ImageIcon("src/main/java/iconos/reporte_inventario.png");
+        ImageIcon agregar = new ImageIcon("iconos/agregar.png");
+        ImageIcon inventario = new ImageIcon("iconos/inventario.png");
+        ImageIcon reporte = new ImageIcon("iconos/reporte_inventario.png");
         btnAgregar.setIcon(agregar);
         btnDatos.setIcon(inventario);
         btnBajos.setIcon(reporte);

@@ -32,9 +32,9 @@ public class InicioSesion extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Inicio de sesión");
-        ImageIcon e = new ImageIcon("src/main/java/iconos/cajaSeguro.png");
-        ImageIcon iniciar = new ImageIcon("src/main/java/iconos/check.png");
-        ImageIcon salir = new ImageIcon("src/main/java/iconos/cancelar.png");
+        ImageIcon e = new ImageIcon("iconos/cajaSeguro.png");
+        ImageIcon iniciar = new ImageIcon("iconos/check.png");
+        ImageIcon salir = new ImageIcon("iconos/cancelar.png");
         cajaSeguro.setIcon(e);
         btnSalir.setIcon(salir);
         btnIniciar.setIcon(iniciar);
@@ -102,7 +102,6 @@ public class InicioSesion extends javax.swing.JFrame {
         label1.setText("USUARIO:");
         label1.setPreferredSize(new java.awt.Dimension(130, 35));
 
-        txtusuario.setText("admin");
         txtusuario.setPreferredSize(new java.awt.Dimension(170, 35));
         txtusuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -114,7 +113,6 @@ public class InicioSesion extends javax.swing.JFrame {
         labelc.setText("CONTRASEÑA:");
         labelc.setPreferredSize(new java.awt.Dimension(130, 35));
 
-        password.setText("@12345");
         password.setPreferredSize(new java.awt.Dimension(170, 35));
         password.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

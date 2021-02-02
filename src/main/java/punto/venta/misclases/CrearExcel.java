@@ -125,7 +125,7 @@ public class CrearExcel {
                 System.out.println("Error al crear directorio");
             }
         }
-        FileOutputStream file = new FileOutputStream("C:\\punto_venta\\inventario"+formatoFecha.format(d)+" "+formatoHora.format(d)+" hrs.xls");
+        FileOutputStream file = new FileOutputStream("C:\\punto_venta\\inventario\\"+formatoFecha.format(d)+" "+formatoHora.format(d)+" hrs.xls");
         
         workbook.write(file);
         file.close();
@@ -247,7 +247,7 @@ public class CrearExcel {
         
         workbook.write(file);
         file.close();
-        Utilidades.confirma(confir, "Se ha generado el documento de manera correcta, puedes encontrar el archivo en C:/inventario_punto_venta/ventas/ ");
+        Utilidades.confirma(confir, "Se ha generado el documento de manera correcta, puedes encontrar el archivo en C:/punto_venta/ventas/ ");
     }
     
     

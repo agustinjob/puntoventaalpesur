@@ -28,9 +28,9 @@ UsuarioModificar uModificar = new UsuarioModificar();
     }
 
    public void configurarIconos(){
-     ImageIcon icoNue = new ImageIcon("src/main/java/iconos/cliente_nuevo.png");
-     ImageIcon icoMod = new ImageIcon("src/main/java/iconos/modificar_cliente.png");
-     ImageIcon icoEli = new ImageIcon("src/main/java/iconos/eliminar_cliente.png");
+     ImageIcon icoNue = new ImageIcon("iconos/cliente_nuevo.png");
+     ImageIcon icoMod = new ImageIcon("iconos/modificar_cliente.png");
+     ImageIcon icoEli = new ImageIcon("iconos/eliminar_cliente.png");
      btnNuevo.setIcon(icoNue);
      btnModificar.setIcon(icoMod);
      btnEliminar.setIcon(icoEli);

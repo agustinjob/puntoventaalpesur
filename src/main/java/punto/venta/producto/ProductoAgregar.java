@@ -28,9 +28,9 @@ public class ProductoAgregar extends javax.swing.JPanel {
      
     public ProductoAgregar() {
         initComponents();
-        ImageIcon guardar = new ImageIcon("src/main/java/iconos/check.png");
+        ImageIcon guardar = new ImageIcon("iconos/check.png");
         btnGuardar.setIcon(guardar);
-        ImageIcon catalogo = new ImageIcon("src/main/java/iconos/catalogo.png");
+        ImageIcon catalogo = new ImageIcon("iconos/catalogo.png");
         btnMostrarTodos.setIcon(catalogo);
           txtCodigo.requestFocus();
     }

@@ -31,12 +31,12 @@ public class TransferirEstructura extends javax.swing.JPanel {
 
     public TransferirEstructura() {
         initComponents();
-        ImageIcon a3 = new ImageIcon("src/main/java/iconos/proximo.png");
-        ImageIcon lupa = new ImageIcon("src/main/java/iconos/buscador.png");
-        ImageIcon transformar = new ImageIcon("src/main/java/iconos/inter.png");
-        ImageIcon exportarI = new ImageIcon("src/main/java/iconos/exportar.png");
-        ImageIcon agregarI = new ImageIcon("src/main/java/iconos/agregar.png");
-         ImageIcon datos = new ImageIcon("src/main/java/iconos/datos.png");
+        ImageIcon a3 = new ImageIcon("iconos/proximo.png");
+        ImageIcon lupa = new ImageIcon("iconos/buscador.png");
+        ImageIcon transformar = new ImageIcon("iconos/inter.png");
+        ImageIcon exportarI = new ImageIcon("iconos/exportar.png");
+        ImageIcon agregarI = new ImageIcon("iconos/agregar.png");
+         ImageIcon datos = new ImageIcon("iconos/datos.png");
         btnBuscarT.setIcon(lupa);
         btnBuscarA.setIcon(lupa);
         btnTransformar.setIcon(transformar);
