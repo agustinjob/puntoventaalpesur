@@ -21,7 +21,7 @@ public class ClienteAgregar extends javax.swing.JPanel {
     Confirmacion confirma;
     public ClienteAgregar() {
         initComponents();
-        ImageIcon guardar = new ImageIcon("src/main/java/iconos/check.png");
+        ImageIcon guardar = new ImageIcon("iconos/check.png");
         btnGuardar.setIcon(guardar);
     }
 
